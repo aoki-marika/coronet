@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "GameHost.hpp"
 
 namespace Coronet
