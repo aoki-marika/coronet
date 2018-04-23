@@ -15,5 +15,6 @@ namespace Coronet
             ~Renderer();
 
             void Update() override;
+            void Draw() override;
     };
 }

@@ -37,6 +37,7 @@ namespace Coronet
             }
 
             renderer->Update();
+            renderer->Draw();
         }
     }
 

@@ -18,8 +18,14 @@ namespace Coronet
     void Renderer::Update()
     {
         Container::Update();
+    }
 
+    void Renderer::Draw()
+    {
         SDL_RenderClear(renderer);
+
+        Container::Draw();
+
         SDL_RenderPresent(renderer);
     }
 }

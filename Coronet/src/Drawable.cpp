@@ -13,4 +13,8 @@ namespace Coronet
     void Drawable::Update()
     {
     }
+
+    void Drawable::Draw()
+    {
+    }
 }

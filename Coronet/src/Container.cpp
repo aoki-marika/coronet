@@ -35,4 +35,12 @@ namespace Coronet
         for (auto &c : children)
             c->Update();
     }
+
+    void Container::Draw()
+    {
+        Drawable::Draw();
+
+        for (auto &c : children)
+            c->Draw();
+    }
 }

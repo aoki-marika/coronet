@@ -13,5 +13,6 @@ namespace Coronet
             ~Drawable();
 
             virtual void Update();
+            virtual void Draw();
     };
 }
