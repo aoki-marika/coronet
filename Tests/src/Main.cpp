@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-    auto host = std::make_shared<Coronet::GameHost>();
+    auto host = std::make_shared<Coronet::GameHost>("Tests");
     auto game = std::make_shared<Coronet::Game>();
 
     host->Run(game);
