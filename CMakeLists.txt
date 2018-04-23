@@ -15,3 +15,4 @@ include_directories(${SDL2_INCLUDE_DIRS})
 
 # Include sub-projects
 add_subdirectory(Coronet)
+add_subdirectory(Tests)
