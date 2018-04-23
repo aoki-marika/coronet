@@ -1,14 +1,14 @@
 #include <iostream>
+#include <SDL2/SDL.h>
 
 #include "GameHost.hpp"
-#include "Window.hpp"
 
 namespace Coronet
 {
     GameHost::GameHost(const char *gameName)
     {
         // todo: placeholder window size
-        auto window = std::make_shared<Window>(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 100, 100, gameName);
+        window = std::make_shared<Window>(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 100, 100, gameName);
         renderer = std::make_shared<Renderer>(window);
     }
 
@@ -19,6 +19,28 @@ namespace Coronet
 
         hostedGame = game;
 
+        SDL_Event event;
+        running = true;
+
         renderer->Add(game);
+        game->OnRun();
+
+        while (running)
+        {
+            while (SDL_PollEvent(&event) != 0)
+            {
+                switch (event.type)
+                {
+                    case SDL_QUIT: Exit(); break;
+                    default: break;
+                }
+            }
+        }
+    }
+
+    void GameHost::Exit()
+    {
+        running = false;
+        hostedGame->OnExit();
     }
 }

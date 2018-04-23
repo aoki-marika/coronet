@@ -6,5 +6,8 @@ namespace Coronet
     {
         public:
             Game();
+
+            virtual void OnRun();
+            virtual void OnExit();
     };
 }
