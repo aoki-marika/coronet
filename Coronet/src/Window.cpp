@@ -17,4 +17,9 @@ namespace Coronet
     {
         SDL_DestroyWindow(window);
     }
+
+    SDL_Window *Window::GetWindow()
+    {
+        return window;
+    }
 }

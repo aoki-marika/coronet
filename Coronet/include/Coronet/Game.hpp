@@ -1,6 +1,8 @@
+#include "Container.hpp"
+
 namespace Coronet
 {
-    class Game
+    class Game : public Container
     {
         public:
             Game();

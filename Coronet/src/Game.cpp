@@ -2,7 +2,7 @@
 
 namespace Coronet
 {
-    Game::Game()
+    Game::Game() : Container()
     {
     }
 }

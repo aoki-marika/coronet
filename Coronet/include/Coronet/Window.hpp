@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SDL2/SDL.h>
 
 namespace Coronet
@@ -10,5 +12,7 @@ namespace Coronet
         public:
             Window(int x, int y, int width, int height, const char *title = "Window");
             ~Window();
+
+            SDL_Window *GetWindow();
     };
 }
