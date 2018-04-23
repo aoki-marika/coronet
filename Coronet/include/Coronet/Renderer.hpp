@@ -13,5 +13,7 @@ namespace Coronet
         public:
             Renderer(const std::shared_ptr<Window> &window);
             ~Renderer();
+
+            void Update() override;
     };
 }

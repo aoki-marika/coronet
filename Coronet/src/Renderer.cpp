@@ -14,4 +14,12 @@ namespace Coronet
     {
         SDL_DestroyRenderer(renderer);
     }
+
+    void Renderer::Update()
+    {
+        Container::Update();
+
+        SDL_RenderClear(renderer);
+        SDL_RenderPresent(renderer);
+    }
 }
