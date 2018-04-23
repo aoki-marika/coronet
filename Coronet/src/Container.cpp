@@ -27,4 +27,12 @@ namespace Coronet
         children.erase(std::remove(children.begin(), children.end(), drawable), children.end());
         drawable->Parent.reset();
     }
+
+    void Container::Update()
+    {
+        Drawable::Update();
+
+        for (auto &c : children)
+            c->Update();
+    }
 }

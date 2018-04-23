@@ -17,5 +17,6 @@ namespace Coronet
 
             void Add(const std::shared_ptr<Drawable> &drawable);
             void Remove(const std::shared_ptr<Drawable> &drawable);
+            void Update() override;
     };
 }

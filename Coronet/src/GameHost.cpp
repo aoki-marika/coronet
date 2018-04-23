@@ -35,6 +35,8 @@ namespace Coronet
                     default: break;
                 }
             }
+
+            renderer->Update();
         }
     }
 
