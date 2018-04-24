@@ -9,7 +9,6 @@ namespace Coronet
     {
         protected:
             virtual SDL_Texture *GetDrawTexture() = 0;
-            virtual Vector2 GetDrawSize() = 0;
 
         public:
             void Draw(SDL_Renderer *renderer) override;

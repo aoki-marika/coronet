@@ -10,20 +10,40 @@ namespace Coronet
     {
     }
 
-    Vector2 Drawable::GetDrawPosition()
+    Vector2 Drawable::GetDrawPosition(bool includeCamera)
     {
-        if (!Parent.expired())
-        {
-            Vector2 parentPosition = Parent.lock()->GetDrawPosition();
-            return { parentPosition.x + Position.x, parentPosition.y + Position.y };
-        }
+        Vector2 position = Position;
 
-        return Position;
+        if (includeCamera)
+            position = camera->Position + position;
+
+        if (!Parent.expired())
+            position = Parent.lock()->GetDrawPosition() + position;
+
+        return position;
+    }
+
+    Vector2 Drawable::GetDrawSize()
+    {
+        return { 0, 0 };
+    }
+
+    bool Drawable::IsVisible()
+    {
+        Vector2 p = GetDrawPosition();
+        Vector2 s = GetDrawSize();
+        SDL_Rect v = camera->GetViewport();
+
+        return p.x < v.x + v.w ||
+               p.y < v.y + v.h ||
+               p.x + s.x < v.x ||
+               p.y + s.y < v.y;
     }
 
     void Drawable::Load(DependencyManager &dependencies)
     {
         clock = dependencies.Get<GameClock>();
+        camera = dependencies.Get<Camera>();
     }
 
     void Drawable::LoadComplete()

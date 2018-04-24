@@ -7,6 +7,7 @@
 #include "Vector2.hpp"
 #include "Transformable.hpp"
 #include "GameClock.hpp"
+#include "Camera.hpp"
 
 namespace Coronet
 {
@@ -20,11 +21,22 @@ namespace Coronet
     {
         private:
             std::shared_ptr<GameClock> clock;
+            std::shared_ptr<Camera> camera;
 
         protected:
             DrawableLoadState State = DrawableLoadState::Unloaded;
 
-            virtual Vector2 GetDrawPosition();
+            //
+            // includeCamera is whether or not the camera position should be
+            // factored into the returned position.
+            //
+            // this is needed because without it, when GetDrawPosition queries
+            // the parents draw positions it includes camera position for every
+            // parent and exponentially increases the draw position.
+            //
+            virtual Vector2 GetDrawPosition(bool includeCamera = false);
+            virtual Vector2 GetDrawSize();
+            virtual bool IsVisible();
 
             virtual void Load(DependencyManager &dependencies);
             virtual void LoadComplete();
