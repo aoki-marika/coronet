@@ -12,6 +12,6 @@ namespace Coronet
             virtual Vector2 GetDrawSize() = 0;
 
         public:
-            void Draw() override;
+            void Draw(SDL_Renderer *renderer) override;
     };
 }

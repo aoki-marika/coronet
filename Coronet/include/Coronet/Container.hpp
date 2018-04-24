@@ -20,6 +20,6 @@ namespace Coronet
             void Add(const std::shared_ptr<Drawable> &drawable);
             void Remove(const std::shared_ptr<Drawable> &drawable);
             virtual void Update() override;
-            virtual void Draw() override;
+            virtual void Draw(SDL_Renderer *renderer) override;
     };
 }

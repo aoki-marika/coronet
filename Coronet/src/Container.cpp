@@ -56,11 +56,11 @@ namespace Coronet
             c->Update();
     }
 
-    void Container::Draw()
+    void Container::Draw(SDL_Renderer *renderer)
     {
-        Drawable::Draw();
+        Drawable::Draw(renderer);
 
         for (auto &c : children)
-            c->Draw();
+            c->Draw(renderer);
     }
 }

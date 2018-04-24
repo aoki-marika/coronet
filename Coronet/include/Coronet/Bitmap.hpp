@@ -1,3 +1,4 @@
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
 #include "Vector2.hpp"
@@ -15,5 +16,6 @@ namespace Coronet
             ~Bitmap();
 
             Vector2 GetSize();
+            SDL_Texture *ToTexture(SDL_Renderer *renderer);
     };
 }

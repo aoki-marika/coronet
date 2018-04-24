@@ -14,7 +14,9 @@ namespace Coronet
             Renderer(const std::shared_ptr<Window> &window);
             ~Renderer();
 
+            SDL_Renderer *GetRenderer();
+
             void Update() override;
-            void Draw() override;
+            void Draw();
     };
 }

@@ -32,4 +32,9 @@ namespace Coronet
     {
         return size;
     }
+
+    SDL_Texture *Bitmap::ToTexture(SDL_Renderer *renderer)
+    {
+        return SDL_CreateTextureFromSurface(renderer, surface);
+    }
 }

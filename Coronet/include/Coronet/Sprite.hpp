@@ -13,6 +13,8 @@ namespace Coronet
             SDL_Texture *GetDrawTexture() override;
             Vector2 GetDrawSize() override;
 
+            virtual void Load(DependencyManager &dependencies) override;
+
         public:
             Sprite(const std::shared_ptr<Bitmap> &bitmap);
             ~Sprite();

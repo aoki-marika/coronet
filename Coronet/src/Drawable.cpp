@@ -34,7 +34,7 @@ namespace Coronet
     {
     }
 
-    void Drawable::Draw()
+    void Drawable::Draw(SDL_Renderer *renderer)
     {
     }
 }

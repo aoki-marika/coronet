@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <SDL2/SDL.h>
 
 #include "DependencyManager.hpp"
 
@@ -8,14 +9,14 @@ namespace Coronet
 {
     enum class DrawableLoadState
     {
-        Unloaded = 0,
+        Unloaded,
         Loaded
     };
 
     class Drawable
     {
         protected:
-            DrawableLoadState State;
+            DrawableLoadState State = DrawableLoadState::Unloaded;
 
             virtual void Load(DependencyManager &dependencies);
             virtual void LoadComplete();
@@ -29,6 +30,6 @@ namespace Coronet
             // todo: dont like callComplete
             virtual void Inject(DependencyManager &dependencies, bool callComplete = true);
             virtual void Update();
-            virtual void Draw();
+            virtual void Draw(SDL_Renderer *renderer);
     };
 }
