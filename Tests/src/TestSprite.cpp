@@ -12,6 +12,6 @@ namespace Tests
     {
         TestCase::Update();
 
-        sprite->Position = sprite->Position += { 1, 1 };
+        sprite->Position += { 1, 1 };
     }
 }
