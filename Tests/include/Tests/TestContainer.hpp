@@ -2,10 +2,9 @@
 
 namespace Tests
 {
-    // todo: TestTransforms -> TestTransform
-    class TestTransforms : public TestCase
+    class TestContainer : public TestCase
     {
-        protected:
+        public:
             void Load(Coronet::DependencyManager &dependencies) override;
     };
 }
