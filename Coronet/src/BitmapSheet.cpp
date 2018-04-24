@@ -53,6 +53,13 @@ namespace Coronet
         };
 
         SDL_SetRenderTarget(renderer, tileTexture);
+
+        if (IsColourKeyed())
+        {
+            SDL_RenderClear(renderer);
+            SDL_SetTextureBlendMode(tileTexture, SDL_BLENDMODE_BLEND);
+        }
+
         SDL_RenderCopy(renderer, texture, &sourceRect, NULL);
         SDL_SetRenderTarget(renderer, NULL);
 

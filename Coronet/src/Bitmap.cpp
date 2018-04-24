@@ -1,4 +1,5 @@
 #include <sstream>
+#include <SDL2/SDL_image.h>
 
 #include "Bitmap.hpp"
 #include "Utilities.hpp"
@@ -28,13 +29,29 @@ namespace Coronet
             SDL_FreeSurface(surface);
     }
 
+    bool Bitmap::IsColourKeyed()
+    {
+        return colourKeyed;
+    }
+
     Vector2 Bitmap::GetSize()
     {
         return size;
     }
 
+    void Bitmap::SetColourKey(Uint8 r, Uint8 g, Uint8 b)
+    {
+        SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, r, g, b));
+        colourKeyed = true;
+    }
+
     SDL_Texture *Bitmap::ToTexture(SDL_Renderer *renderer)
     {
-        return SDL_CreateTextureFromSurface(renderer, surface);
+        SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+        if (colourKeyed)
+            SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+
+        return texture;
     }
 }

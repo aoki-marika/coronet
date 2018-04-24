@@ -5,6 +5,8 @@ namespace Tests
     TestTiledTexture::TestTiledTexture()
     {
         auto sheet = std::make_shared<Coronet::BitmapSheet>("tiles.png", 8, 8);
+        sheet->SetColourKey(255, 0, 255);
+
         tiled = std::make_shared<Coronet::TiledTexture>(sheet, 10, 10);
 
         Add(tiled);
