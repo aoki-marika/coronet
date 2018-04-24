@@ -10,6 +10,17 @@ namespace Coronet
     {
     }
 
+    Vector2 Drawable::GetDrawPosition()
+    {
+        if (!Parent.expired())
+        {
+            Vector2 parentPosition = Parent.lock()->GetDrawPosition();
+            return { parentPosition.x + Position.x, parentPosition.y + Position.y };
+        }
+
+        return Position;
+    }
+
     void Drawable::Load(DependencyManager &dependencies)
     {
     }

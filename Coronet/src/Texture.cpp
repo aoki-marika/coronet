@@ -6,8 +6,9 @@ namespace Coronet
     {
         SDL_Texture *texture = GetDrawTexture();
         Vector2 size = GetDrawSize();
+        Vector2 position = GetDrawPosition();
 
-        SDL_Rect dest = { 0, 0, size.x, size.y };
+        SDL_Rect dest = { position.x, position.y, size.x, size.y };
         SDL_RenderCopy(renderer, texture, NULL, &dest);
     }
 }

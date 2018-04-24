@@ -1,11 +1,18 @@
-#include <Coronet/Sprite.hpp>
-
 #include "TestSprite.hpp"
 
 namespace Tests
 {
     TestSprite::TestSprite()
     {
-        Add(std::make_shared<Coronet::Sprite>(std::make_shared<Coronet::Bitmap>("test.png")));
+        sprite = std::make_shared<Coronet::Sprite>(std::make_shared<Coronet::Bitmap>("test.png"));
+        Add(sprite);
+    }
+
+    void TestSprite::Update()
+    {
+        TestCase::Update();
+
+        Coronet::Vector2 offset = { 1, 1 };
+        sprite->Position = sprite->Position + offset;
     }
 }
