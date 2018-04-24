@@ -12,7 +12,6 @@ namespace Tests
     {
         TestCase::Update();
 
-        Coronet::Vector2 offset = { 1, 1 };
-        sprite->Position = sprite->Position + offset;
+        sprite->Position = sprite->Position += { 1, 1 };
     }
 }
