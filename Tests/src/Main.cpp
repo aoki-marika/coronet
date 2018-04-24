@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     if (argc == 2)
     {
-        auto host = std::make_shared<Coronet::GameHost>("Tests");
+        auto host = std::make_shared<Coronet::GameHost>("Tests", std::make_shared<Coronet::Metrics>(8, 8, 2, 2, 20, 18));
         auto game = std::make_shared<Tests::TestsGame>(argv[1]);
 
         host->Run(game);

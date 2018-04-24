@@ -4,15 +4,17 @@
 
 namespace Coronet
 {
-    GameHost::GameHost(const char *gameName)
+    GameHost::GameHost(const char *gameName, const std::shared_ptr<Metrics> &metrics)
     {
+        this->metrics = metrics;
         dependencies = DependencyManager();
 
-        // todo: placeholder window size
-        window = std::make_shared<Window>(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 100, 100, gameName);
+        Vector2 s = metrics->GetScreenSize();
+        window = std::make_shared<Window>(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, s.x, s.y, gameName);
         renderer = std::make_shared<Renderer>(window);
 
         dependencies.Register<Renderer>(renderer);
+        dependencies.Register<Metrics>(metrics);
     }
 
     void GameHost::Run(const std::shared_ptr<Game> &game)
