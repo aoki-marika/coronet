@@ -23,7 +23,7 @@ namespace Coronet
 
     void Drawable::Load(DependencyManager &dependencies)
     {
-        clock = dependencies.Get<Clock>();
+        clock = dependencies.Get<GameClock>();
     }
 
     void Drawable::LoadComplete()

@@ -12,11 +12,11 @@ namespace Coronet
         Vector2 s = metrics->GetScreenSize();
         window = std::make_shared<Window>(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, s.x, s.y, gameName);
         renderer = std::make_shared<Renderer>(window);
-        clock = std::make_shared<Clock>();
+        clock = std::make_shared<GameClock>();
 
         dependencies.Register<Metrics>(metrics);
         dependencies.Register<Renderer>(renderer);
-        dependencies.Register<Clock>(clock);
+        dependencies.Register<GameClock>(clock);
     }
 
     void GameHost::Run(const std::shared_ptr<Game> &game)

@@ -17,11 +17,6 @@ namespace Coronet
             Stop();
     }
 
-    void Clock::SetTicks(Uint32 ticks)
-    {
-        this->ticks = ticks;
-    }
-
     Uint32 Clock::GetTicks()
     {
         Uint32 ticks = 0;
@@ -31,7 +26,7 @@ namespace Coronet
             if (paused)
                 ticks = ticksPaused;
             else
-                ticks = this->ticks - ticksStarted;
+                ticks = GetCurrentTicks() - ticksStarted;
         }
 
         return ticks;
@@ -55,7 +50,7 @@ namespace Coronet
             {
                 started = true;
 
-                ticksStarted = ticks;
+                ticksStarted = GetCurrentTicks();
                 ticksPaused = 0;
             }
             else
@@ -86,7 +81,7 @@ namespace Coronet
             {
                 paused = true;
 
-                ticksPaused = ticks - ticksStarted;
+                ticksPaused = GetCurrentTicks() - ticksStarted;
                 ticksStarted = 0;
             }
             else
@@ -104,7 +99,7 @@ namespace Coronet
             {
                 paused = false;
 
-                ticksStarted = ticks - ticksPaused;
+                ticksStarted = GetCurrentTicks() - ticksPaused;
                 ticksPaused = 0;
             }
             else
