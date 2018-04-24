@@ -13,5 +13,7 @@ namespace Coronet
         public:
             Bitmap(const char *path);
             ~Bitmap();
+
+            Vector2 GetSize();
     };
 }

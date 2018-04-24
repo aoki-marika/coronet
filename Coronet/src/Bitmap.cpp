@@ -27,4 +27,9 @@ namespace Coronet
         if (surface != NULL)
             SDL_FreeSurface(surface);
     }
+
+    Vector2 Bitmap::GetSize()
+    {
+        return size;
+    }
 }

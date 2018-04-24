@@ -6,9 +6,9 @@ namespace Coronet
     class Sprite : public Drawable
     {
         private:
-            Bitmap bitmap;
+            std::shared_ptr<Bitmap> bitmap;
 
         public:
-            Sprite(Bitmap bitmap);
+            Sprite(const std::shared_ptr<Bitmap> &bitmap);
     };
 }

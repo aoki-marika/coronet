@@ -2,7 +2,7 @@
 
 namespace Coronet
 {
-    Sprite::Sprite(Bitmap bitmap) : bitmap(bitmap)
+    Sprite::Sprite(const std::shared_ptr<Bitmap> &bitmap) : bitmap(bitmap)
     {
     }
 }
