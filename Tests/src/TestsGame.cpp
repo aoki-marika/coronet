@@ -4,7 +4,7 @@
 #include "TestCase.hpp"
 #include "TestSprite.hpp"
 #include "TestContainer.hpp"
-#include "TestTransforms.hpp"
+#include "TestTransform.hpp"
 
 namespace Tests
 {
@@ -14,7 +14,7 @@ namespace Tests
 
         if (strcmp(testName, "sprite") == 0) test = std::make_shared<TestSprite>();
         else if (strcmp(testName, "container") == 0) test = std::make_shared<TestContainer>();
-        else if (strcmp(testName, "transforms") == 0) test = std::make_shared<TestTransforms>();
+        else if (strcmp(testName, "transform") == 0) test = std::make_shared<TestTransform>();
         else
         {
             std::stringstream message;

@@ -1,11 +1,11 @@
 #include <Coronet/Sprite.hpp>
 #include <Coronet/Metrics.hpp>
 
-#include "TestTransforms.hpp"
+#include "TestTransform.hpp"
 
 namespace Tests
 {
-    void TestTransforms::Load(Coronet::DependencyManager &dependencies)
+    void TestTransform::Load(Coronet::DependencyManager &dependencies)
     {
         TestCase::Load(dependencies);
 
