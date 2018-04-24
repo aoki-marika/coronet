@@ -10,6 +10,26 @@ namespace Coronet
     {
     }
 
+    void Drawable::Load(DependencyManager &dependencies)
+    {
+    }
+
+    void Drawable::LoadComplete()
+    {
+    }
+
+    void Drawable::Inject(DependencyManager &dependencies, bool callComplete)
+    {
+        if (State == DrawableLoadState::Unloaded)
+        {
+            Load(dependencies);
+            State = DrawableLoadState::Loaded;
+
+            if (callComplete)
+                LoadComplete();
+        }
+    }
+
     void Drawable::Update()
     {
     }

@@ -1,6 +1,7 @@
 #include <sstream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <cxxabi.h>
 
 #include "Utilities.hpp"
 
@@ -23,5 +24,17 @@ namespace Coronet
         IMG_Quit();
         SDL_Quit();
         throw std::logic_error(details.str());
+    }
+
+    std::string Demangle(const char *name)
+    {
+        int status;
+
+        std::unique_ptr<char, void(*)(void*)> demangled {
+            abi::__cxa_demangle(name, NULL, NULL, &status),
+            std::free
+        };
+
+        return status == 0 ? demangled.get() : name;
     }
 }

@@ -10,13 +10,33 @@ namespace Coronet
     {
     }
 
+    void Container::Inject(DependencyManager &dependencies, bool callComplete)
+    {
+        if (State == DrawableLoadState::Unloaded)
+        {
+            this->dependencies = dependencies;
+            Drawable::Inject(dependencies, false);
+
+            for (auto &c : children)
+                c->Inject(dependencies);
+
+            if (callComplete)
+                LoadComplete();
+        }
+    }
+
     void Container::Add(const std::shared_ptr<Drawable> &drawable)
     {
         if (!drawable->Parent.expired())
             throw std::invalid_argument("Cannot add a Drawable to a Container when it is already in one.");
 
-        drawable->Parent = weak_from_this();
         children.push_back(drawable);
+        drawable->Parent = weak_from_this();
+
+        // dont bother if children are being added without dependencies injected,
+        // they will get injected when this drawable is added to the scene
+        if (State == DrawableLoadState::Loaded)
+            drawable->Inject(dependencies);
     }
 
     void Container::Remove(const std::shared_ptr<Drawable> &drawable)
