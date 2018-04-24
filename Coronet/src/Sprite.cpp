@@ -3,6 +3,7 @@
 
 namespace Coronet
 {
+    // todo: allow setting the bitmap after the ctor
     Sprite::Sprite(const std::shared_ptr<Bitmap> &bitmap) : bitmap(bitmap)
     {
     }

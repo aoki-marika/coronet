@@ -53,6 +53,7 @@ namespace Coronet
             {
                 clock->SetTicks(nextGameTick);
                 renderer->Update();
+                clock->Update();
 
                 nextGameTick += 1;
             }

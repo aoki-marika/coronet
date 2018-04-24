@@ -1,0 +1,14 @@
+#include "Animation.hpp"
+#include "Sprite.hpp"
+
+namespace Coronet
+{
+    class BitmapAnimation : public Animation<std::shared_ptr<Bitmap>>
+    {
+        protected:
+            void DisplayFrame(std::shared_ptr<Bitmap> &frame) override;
+
+        public:
+            BitmapAnimation();
+    };
+}

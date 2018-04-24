@@ -32,6 +32,11 @@ namespace Coronet
         return ticks;
     }
 
+    Uint32 Clock::GetElapsed()
+    {
+        return GetTicks() - lastTicks;
+    }
+
     bool Clock::IsStarted()
     {
         return started;
@@ -107,5 +112,10 @@ namespace Coronet
         }
         else
             throw std::logic_error("Cannot unpause an unstarted Clock.");
+    }
+
+    void Clock::Update()
+    {
+        lastTicks = GetTicks();
     }
 }

@@ -7,6 +7,7 @@
 #include "TestCamera.hpp"
 #include "TestTransform.hpp"
 #include "TestTiledTexture.hpp"
+#include "TestAnimation.hpp"
 
 namespace Tests
 {
@@ -19,6 +20,7 @@ namespace Tests
         else if (strcmp(testName, "Camera") == 0) test = std::make_shared<TestCamera>();
         else if (strcmp(testName, "Transform") == 0) test = std::make_shared<TestTransform>();
         else if (strcmp(testName, "TiledTexture") == 0) test = std::make_shared<TestTiledTexture>();
+        else if (strcmp(testName, "Animation") == 0) test = std::make_shared<TestAnimation>();
         else
         {
             std::stringstream message;
