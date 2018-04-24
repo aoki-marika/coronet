@@ -18,7 +18,15 @@ namespace Coronet
             Drawable::Inject(dependencies, false);
 
             for (auto &c : children)
+            {
+                //
+                // this is required for children that are added in the ctor, as
+                // shared_from_this, and in turn weak_from_this, cannot get a
+                // pointer in the ctor, leaving the parent as null
+                //
+                c->Parent = weak_from_this();
                 c->Inject(dependencies);
+            }
 
             if (callComplete)
                 LoadComplete();
