@@ -12,9 +12,11 @@ namespace Coronet
         Vector2 s = metrics->GetScreenSize();
         window = std::make_shared<Window>(SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, s.x, s.y, gameName);
         renderer = std::make_shared<Renderer>(window);
+        clock = std::make_shared<Clock>();
 
-        dependencies.Register<Renderer>(renderer);
         dependencies.Register<Metrics>(metrics);
+        dependencies.Register<Renderer>(renderer);
+        dependencies.Register<Clock>(clock);
     }
 
     void GameHost::Run(const std::shared_ptr<Game> &game)
@@ -24,12 +26,14 @@ namespace Coronet
 
         hostedGame = game;
 
-        SDL_Event event;
-        running = true;
-
+        clock->Start();
         renderer->Add(game);
         renderer->Inject(dependencies);
         game->OnRun();
+
+        SDL_Event event;
+        Uint32 nextGameTick = SDL_GetTicks();
+        running = true;
 
         while (running)
         {
@@ -42,7 +46,15 @@ namespace Coronet
                 }
             }
 
-            renderer->Update();
+            // todo: this works for now but should be revisited when Update and Draw are heavier to see the effects
+            while (SDL_GetTicks() > nextGameTick)
+            {
+                clock->SetTicks(nextGameTick);
+                renderer->Update();
+
+                nextGameTick += 1;
+            }
+
             renderer->Draw();
         }
     }

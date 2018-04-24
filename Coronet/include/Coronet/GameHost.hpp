@@ -5,6 +5,7 @@
 #include "Window.hpp"
 #include "DependencyManager.hpp"
 #include "Metrics.hpp"
+#include "Clock.hpp"
 
 namespace Coronet
 {
@@ -17,6 +18,7 @@ namespace Coronet
             std::shared_ptr<Metrics> metrics;
             std::shared_ptr<Window> window;
             std::shared_ptr<Renderer> renderer;
+            std::shared_ptr<Clock> clock;
             std::shared_ptr<Game> hostedGame;
 
         public:

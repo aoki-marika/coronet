@@ -3,6 +3,7 @@
 #include "TestsGame.hpp"
 #include "TestCase.hpp"
 #include "TestSprite.hpp"
+#include "TestTransforms.hpp"
 
 namespace Tests
 {
@@ -11,6 +12,7 @@ namespace Tests
         std::shared_ptr<TestCase> test;
 
         if (strcmp(testName, "sprite") == 0) test = std::make_shared<TestSprite>();
+        if (strcmp(testName, "transforms") == 0) test = std::make_shared<TestTransforms>();
         else
         {
             std::stringstream message;

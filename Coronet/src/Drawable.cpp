@@ -23,6 +23,7 @@ namespace Coronet
 
     void Drawable::Load(DependencyManager &dependencies)
     {
+        clock = dependencies.Get<Clock>();
     }
 
     void Drawable::LoadComplete()
@@ -43,6 +44,7 @@ namespace Coronet
 
     void Drawable::Update()
     {
+        UpdateTransforms(clock);
     }
 
     void Drawable::Draw(SDL_Renderer *renderer)

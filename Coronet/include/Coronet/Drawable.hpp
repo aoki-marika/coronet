@@ -5,6 +5,8 @@
 
 #include "DependencyManager.hpp"
 #include "Vector2.hpp"
+#include "Transformable.hpp"
+#include "Clock.hpp"
 
 namespace Coronet
 {
@@ -14,8 +16,11 @@ namespace Coronet
         Loaded
     };
 
-    class Drawable
+    class Drawable : public Transformable
     {
+        private:
+            std::shared_ptr<Clock> clock;
+
         protected:
             DrawableLoadState State = DrawableLoadState::Unloaded;
 
