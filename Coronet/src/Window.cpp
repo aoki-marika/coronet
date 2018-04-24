@@ -1,3 +1,5 @@
+#include <SDL2/SDL_image.h>
+
 #include "Window.hpp"
 #include "Utilities.hpp"
 
@@ -16,6 +18,9 @@ namespace Coronet
     Window::~Window()
     {
         SDL_DestroyWindow(window);
+
+        IMG_Quit();
+        SDL_Quit();
     }
 
     SDL_Window *Window::GetWindow()
