@@ -6,6 +6,7 @@
 #include "TestContainer.hpp"
 #include "TestCamera.hpp"
 #include "TestTransform.hpp"
+#include "TestTiledTexture.hpp"
 
 namespace Tests
 {
@@ -13,10 +14,11 @@ namespace Tests
     {
         std::shared_ptr<TestCase> test;
 
-        if (strcmp(testName, "sprite") == 0) test = std::make_shared<TestSprite>();
-        else if (strcmp(testName, "container") == 0) test = std::make_shared<TestContainer>();
-        else if (strcmp(testName, "camera") == 0) test = std::make_shared<TestCamera>();
-        else if (strcmp(testName, "transform") == 0) test = std::make_shared<TestTransform>();
+        if (strcmp(testName, "Sprite") == 0) test = std::make_shared<TestSprite>();
+        else if (strcmp(testName, "Container") == 0) test = std::make_shared<TestContainer>();
+        else if (strcmp(testName, "Camera") == 0) test = std::make_shared<TestCamera>();
+        else if (strcmp(testName, "Transform") == 0) test = std::make_shared<TestTransform>();
+        else if (strcmp(testName, "TiledTexture") == 0) test = std::make_shared<TestTiledTexture>();
         else
         {
             std::stringstream message;
