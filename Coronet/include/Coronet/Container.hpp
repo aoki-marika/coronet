@@ -16,6 +16,8 @@ namespace Coronet
             void Inject(DependencyManager &dependencies, bool callComplete = true) override;
             void Add(const std::shared_ptr<Drawable> &drawable);
             void Remove(const std::shared_ptr<Drawable> &drawable);
+            virtual bool OnKeyDown(SDL_Event event) override;
+            virtual bool OnKeyUp(SDL_Event event) override;
             virtual void Update() override;
             virtual void Draw(SDL_Renderer *renderer) override;
     };

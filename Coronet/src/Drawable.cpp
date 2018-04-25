@@ -72,6 +72,16 @@ namespace Coronet
         }
     }
 
+    bool Drawable::OnKeyDown(SDL_Event event)
+    {
+        return false;
+    }
+
+    bool Drawable::OnKeyUp(SDL_Event event)
+    {
+        return false;
+    }
+
     void Drawable::Update()
     {
         UpdateTransforms(clock);

@@ -62,6 +62,8 @@ namespace Coronet
 
             // todo: dont like callComplete
             virtual void Inject(DependencyManager &dependencies, bool callComplete = true);
+            virtual bool OnKeyDown(SDL_Event event);
+            virtual bool OnKeyUp(SDL_Event event);
             virtual void Update();
             virtual void Draw(SDL_Renderer *renderer);
     };

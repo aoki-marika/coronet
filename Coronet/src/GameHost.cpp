@@ -44,6 +44,8 @@ namespace Coronet
                 switch (event.type)
                 {
                     case SDL_QUIT: Exit(); break;
+                    case SDL_KEYDOWN: renderer->OnKeyDown(event); break;
+                    case SDL_KEYUP: renderer->OnKeyUp(event); break;
                     default: break;
                 }
             }

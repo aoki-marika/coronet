@@ -48,6 +48,25 @@ namespace Coronet
         drawable->Parent.reset();
     }
 
+    bool Container::OnKeyDown(SDL_Event event)
+    {
+        // iterate in reverse so that top-most drawables have the highest priority
+        for (unsigned i = children.size(); i-- > 0;)
+            if (children[i]->OnKeyDown(event))
+                return true;
+
+        return Drawable::OnKeyDown(event);
+    }
+
+    bool Container::OnKeyUp(SDL_Event event)
+    {
+        for (unsigned i = children.size(); i-- > 0;)
+            if (children[i]->OnKeyUp(event))
+                return true;
+
+        return Drawable::OnKeyUp(event);
+    }
+
     void Container::Update()
     {
         Drawable::Update();
