@@ -17,6 +17,12 @@ namespace Coronet
         Loaded
     };
 
+    enum class DrawablePositionSpace
+    {
+        World,
+        Screen
+    };
+
     class Drawable : public Transformable
     {
         private:
@@ -44,6 +50,7 @@ namespace Coronet
         public:
             std::weak_ptr<Drawable> Parent;
             Vector2 Position = { 0, 0 };
+            DrawablePositionSpace Space = DrawablePositionSpace::World;
 
             Drawable();
             ~Drawable();

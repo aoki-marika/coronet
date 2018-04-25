@@ -14,7 +14,7 @@ namespace Coronet
     {
         Vector2 position = Position;
 
-        if (includeCamera)
+        if (includeCamera && Space == DrawablePositionSpace::World)
             position = camera->Position + position;
 
         if (!Parent.expired())

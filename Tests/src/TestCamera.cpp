@@ -7,7 +7,17 @@ namespace Tests
 {
     TestCamera::TestCamera()
     {
-        Add(std::make_shared<Coronet::Sprite>(std::make_shared<Coronet::Bitmap>("test.png")));
+        auto bitmap = std::make_shared<Coronet::Bitmap>("test.png");
+        auto screen = std::make_shared<Coronet::Sprite>(bitmap);
+        auto world = std::make_shared<Coronet::Sprite>(bitmap);
+
+        screen->Space = Coronet::DrawablePositionSpace::Screen;
+        screen->Position = { 104, 96 };
+
+        world->Position = { -16, 16 };
+
+        Add(screen);
+        Add(world);
     }
 
     void TestCamera::Load(Coronet::DependencyManager &dependencies)
