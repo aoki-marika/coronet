@@ -23,6 +23,12 @@ namespace Coronet
         Screen
     };
 
+    enum class Visibility
+    {
+        Visible,
+        Hidden
+    };
+
     class Drawable : public Transformable
     {
         private:
@@ -42,6 +48,7 @@ namespace Coronet
             //
             virtual Vector2 GetDrawPosition(bool includeCamera = false);
             virtual Vector2 GetDrawSize();
+            virtual Visibility GetVisibility();
             virtual bool IsVisible();
 
             virtual void Load(DependencyManager &dependencies);
@@ -51,6 +58,7 @@ namespace Coronet
             std::weak_ptr<Drawable> Parent;
             Vector2 Position = { 0, 0 };
             DrawablePositionSpace Space = DrawablePositionSpace::World;
+            Visibility Visibility = Visibility::Visible;
 
             Drawable();
             ~Drawable();

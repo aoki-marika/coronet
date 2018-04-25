@@ -28,8 +28,19 @@ namespace Coronet
         return { 0, 0 };
     }
 
+    Visibility Drawable::GetVisibility()
+    {
+        if (Visibility != Visibility::Hidden && !Parent.expired())
+            return Parent.lock()->GetVisibility();
+
+        return Visibility;
+    }
+
     bool Drawable::IsVisible()
     {
+        if (GetVisibility() == Visibility::Hidden)
+            return false;
+
         Vector2 p = GetDrawPosition(true);
         Vector2 s = GetDrawSize();
         SDL_Rect v = camera->GetViewport();

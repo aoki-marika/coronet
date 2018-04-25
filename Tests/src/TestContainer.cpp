@@ -47,6 +47,8 @@ namespace Tests
         containerOne->Add(containerFour);
         containerFour->Add(containerFive);
 
+        containerFour->Visibility = Coronet::Visibility::Hidden;
+
         Add(containerOne);
     }
 }
