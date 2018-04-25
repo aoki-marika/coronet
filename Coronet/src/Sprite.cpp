@@ -38,7 +38,7 @@ namespace Coronet
         if (bitmap != nullptr)
             return bitmap->GetSize();
         else
-            return { 0, 0 };
+            return Texture::GetDrawSize();
     }
 
     void Sprite::SetBitmap(const std::shared_ptr<Bitmap> &bitmap)
