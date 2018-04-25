@@ -2,14 +2,6 @@
 
 namespace Coronet
 {
-    Container::Container() : Drawable()
-    {
-    }
-
-    Container::~Container()
-    {
-    }
-
     void Container::Inject(DependencyManager &dependencies, bool callComplete)
     {
         if (State == DrawableLoadState::Unloaded)

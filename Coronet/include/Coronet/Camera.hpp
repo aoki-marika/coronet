@@ -17,7 +17,6 @@ namespace Coronet
             Vector2 Position = { 0, 0 };
 
             Camera(int viewportWidth, int viewportHeight);
-            ~Camera();
             SDL_Rect GetViewport();
     };
 }

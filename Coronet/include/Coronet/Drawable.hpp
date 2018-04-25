@@ -60,9 +60,6 @@ namespace Coronet
             DrawablePositionSpace Space = DrawablePositionSpace::World;
             Visibility Visibility = Visibility::Visible;
 
-            Drawable();
-            ~Drawable();
-
             // todo: dont like callComplete
             virtual void Inject(DependencyManager &dependencies, bool callComplete = true);
             virtual void Update();

@@ -4,10 +4,6 @@
 
 namespace Coronet
 {
-    Clock::Clock()
-    {
-    }
-
     Clock::~Clock()
     {
         if (paused)

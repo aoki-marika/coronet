@@ -7,10 +7,6 @@ namespace Coronet
         size = { viewportWidth, viewportHeight };
     }
 
-    Camera::~Camera()
-    {
-    }
-
     SDL_Rect Camera::GetViewport()
     {
         return { Position.x, Position.y, size.x, size.y };

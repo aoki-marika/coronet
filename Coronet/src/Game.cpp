@@ -2,10 +2,6 @@
 
 namespace Coronet
 {
-    Game::Game() : Container()
-    {
-    }
-
     void Game::OnRun()
     {
     }

@@ -13,10 +13,6 @@ namespace Coronet
         this->onFinished = onFinished;
     }
 
-    Transform::~Transform()
-    {
-    }
-
     void Transform::Update(const std::shared_ptr<Clock> &clock)
     {
         Uint32 ticks = clock->GetTicks();

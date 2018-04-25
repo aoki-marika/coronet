@@ -2,14 +2,6 @@
 
 namespace Coronet
 {
-    Drawable::Drawable()
-    {
-    }
-
-    Drawable::~Drawable()
-    {
-    }
-
     Vector2 Drawable::GetDrawPosition(bool includeCamera)
     {
         Vector2 position = Position;

@@ -17,7 +17,6 @@ namespace Coronet
 
         public:
             Transform(double startValue, double endValue, double startTime, double endTime, Easing easing, std::function<void(double)> callback, std::function<void()> onFinished = nullptr);
-            ~Transform();
 
             void Update(const std::shared_ptr<Clock> &clock);
             bool IsFinished();
