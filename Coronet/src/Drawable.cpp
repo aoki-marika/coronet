@@ -15,7 +15,7 @@ namespace Coronet
         Vector2 position = Position;
 
         if (includeCamera && Space == DrawablePositionSpace::World)
-            position = camera->Position + position;
+            position = position - camera->Position;
 
         if (!Parent.expired())
             position = Parent.lock()->GetDrawPosition() + position;
@@ -30,14 +30,21 @@ namespace Coronet
 
     bool Drawable::IsVisible()
     {
-        Vector2 p = GetDrawPosition();
+        Vector2 p = GetDrawPosition(true);
         Vector2 s = GetDrawSize();
         SDL_Rect v = camera->GetViewport();
 
-        return p.x < v.x + v.w ||
-               p.y < v.y + v.h ||
-               p.x + s.x < v.x ||
-               p.y + s.y < v.y;
+        // ignore camera position if we are in screen space
+        if (Space == DrawablePositionSpace::Screen)
+        {
+            v.x = 0;
+            v.y = 0;
+        }
+
+        bool offScreen = p.x >= v.w || p.x + s.x <= 0 ||
+                         p.y >= v.h || p.y + s.y <= 0;
+
+        return !offScreen;
     }
 
     void Drawable::Load(DependencyManager &dependencies)
