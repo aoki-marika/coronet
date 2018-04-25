@@ -3,14 +3,18 @@
 
 namespace Coronet
 {
-    // todo: allow setting the bitmap after the ctor
-    Sprite::Sprite(const std::shared_ptr<Bitmap> &bitmap) : bitmap(bitmap)
+    Sprite::Sprite(const std::shared_ptr<Bitmap> &bitmap)
+    {
+        SetBitmap(bitmap);
+    }
+
+    Sprite::Sprite()
     {
     }
 
     Sprite::~Sprite()
     {
-        if (texture != NULL)
+        if (texture != nullptr)
             SDL_DestroyTexture(texture);
     }
 
@@ -18,7 +22,10 @@ namespace Coronet
     {
         Texture::Load(dependencies);
 
-        texture = bitmap->ToTexture(dependencies.Get<Renderer>()->GetRenderer());
+        renderer = dependencies.Get<Renderer>()->GetRenderer();
+
+        if (bitmap != nullptr)
+            texture = bitmap->ToTexture(renderer);
     }
 
     SDL_Texture *Sprite::GetDrawTexture()
@@ -28,6 +35,18 @@ namespace Coronet
 
     Vector2 Sprite::GetDrawSize()
     {
-        return bitmap->GetSize();
+        if (bitmap != nullptr)
+            return bitmap->GetSize();
+        else
+            return { 0, 0 };
+    }
+
+    void Sprite::SetBitmap(const std::shared_ptr<Bitmap> &bitmap)
+    {
+        if (this->bitmap == bitmap) return;
+        this->bitmap = bitmap;
+
+        if (renderer != nullptr)
+            texture = bitmap->ToTexture(renderer);
     }
 }

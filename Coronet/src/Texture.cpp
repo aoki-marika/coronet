@@ -4,9 +4,10 @@ namespace Coronet
 {
     void Texture::Draw(SDL_Renderer *renderer)
     {
-        if (IsVisible())
+        SDL_Texture *texture = GetDrawTexture();
+
+        if (IsVisible() && texture != nullptr)
         {
-            SDL_Texture *texture = GetDrawTexture();
             Vector2 size = GetDrawSize();
             Vector2 position = GetDrawPosition(true);
 

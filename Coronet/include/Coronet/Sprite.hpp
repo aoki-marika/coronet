@@ -7,7 +7,8 @@ namespace Coronet
     {
         private:
             std::shared_ptr<Bitmap> bitmap;
-            SDL_Texture *texture = NULL;
+            SDL_Renderer *renderer = nullptr;
+            SDL_Texture *texture = nullptr;
 
         protected:
             SDL_Texture *GetDrawTexture() override;
@@ -17,6 +18,9 @@ namespace Coronet
 
         public:
             Sprite(const std::shared_ptr<Bitmap> &bitmap);
+            Sprite();
             ~Sprite();
+
+            void SetBitmap(const std::shared_ptr<Bitmap> &bitmap);
     };
 }
