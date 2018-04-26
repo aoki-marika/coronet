@@ -1,6 +1,7 @@
 # Project specific
 bin/Tests
 lib/
+coronet.log
 
 # macOS
 .DS_Store

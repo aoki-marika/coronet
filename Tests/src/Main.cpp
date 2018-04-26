@@ -1,8 +1,10 @@
-#include <iostream>
-
 #include <Coronet/GameHost.hpp>
+#include <Coronet/Logging.hpp>
 
 #include "TestsGame.hpp"
+
+using Coronet::Logger;
+using Coronet::LogLevel;
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +18,6 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    std::cout << "Please specify a test to run using the first argument." << std::endl;
+    Log(LogLevel::Error) << "No test specified, please specify one with the first argument.";
     return 1;
 }
