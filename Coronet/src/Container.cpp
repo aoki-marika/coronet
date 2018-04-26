@@ -51,7 +51,7 @@ namespace Coronet
     bool Container::OnKeyDown(SDL_Event event)
     {
         // iterate in reverse so that top-most drawables have the highest priority
-        for (unsigned i = children.size(); i-- > 0;)
+        for (int i = children.size(); i-- > 0;)
             if (children[i]->OnKeyDown(event))
                 return true;
 
@@ -60,7 +60,7 @@ namespace Coronet
 
     bool Container::OnKeyUp(SDL_Event event)
     {
-        for (unsigned i = children.size(); i-- > 0;)
+        for (int i = children.size(); i-- > 0;)
             if (children[i]->OnKeyUp(event))
                 return true;
 

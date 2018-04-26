@@ -28,6 +28,37 @@ namespace Coronet
         return Visibility;
     }
 
+    Flip Drawable::GetFlip()
+    {
+        if (!Parent.expired())
+        {
+            auto parentFlip = Parent.lock()->GetFlip();
+
+            if (parentFlip != Flip::None)
+            {
+                if (Flip == Flip::None)
+                    return parentFlip;
+
+                auto horizontal = Flip::None;
+                auto vertical = Flip::None;
+
+                if (parentFlip & Flip::Horizontal && Flip & Flip::Horizontal)
+                    horizontal = Flip::None;
+                else if (Flip & Flip::Horizontal)
+                    horizontal = Flip::Horizontal;
+
+                if (parentFlip & Flip::Vertical && Flip & Flip::Vertical)
+                    vertical = Flip::None;
+                else if (Flip & Flip::Vertical)
+                    vertical = Flip::Vertical;
+
+                return horizontal | vertical;
+            }
+        }
+
+        return Flip;
+    }
+
     bool Drawable::IsVisible()
     {
         if (GetVisibility() == Visibility::Hidden)
