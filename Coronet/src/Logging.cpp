@@ -1,10 +1,9 @@
 #include <iostream>
 #include <chrono>
 #include <iomanip>
-#include <mach-o/dyld.h>
-#include <libgen.h>
 
 #include "Logging.hpp"
+#include "System.hpp"
 
 using namespace std::chrono;
 
@@ -12,19 +11,11 @@ namespace Coronet
 {
     Logger::Logger(const char *filename)
     {
-        // todo: move to a platform specific implementation elsewhere
-        char executablePath[PATH_MAX];
-        uint32_t size = sizeof(executablePath);
-        _NSGetExecutablePath(executablePath, &size);
+        char *path = System::GetExecutableDirectory();
+        strcat(path, System::GetPathSeparator());
+        strcat(path, filename);
 
-        char *realPath, *dirName;
-        realPath = realpath(executablePath, NULL);
-        dirName = dirname(realPath);
-
-        strcat(dirName, "/");
-        strcat(dirName, filename);
-
-        logFile.open(dirName, std::fstream::out | std::ofstream::trunc);
+        logFile.open(path, std::fstream::out | std::ofstream::trunc);
     }
 
     Logger::~Logger()
