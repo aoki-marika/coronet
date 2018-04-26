@@ -29,6 +29,23 @@ namespace Coronet
         Hidden
     };
 
+    enum class Flip
+    {
+        None = SDL_FLIP_NONE,
+        Horizontal = SDL_FLIP_HORIZONTAL,
+        Vertical = SDL_FLIP_VERTICAL
+    };
+
+    inline Flip operator|(Flip lhs, Flip rhs)
+    {
+        return static_cast<Flip>(static_cast<int>(lhs) | static_cast<int>(rhs));
+    }
+
+    inline bool operator&(Flip lhs, Flip rhs)
+    {
+        return static_cast<bool>(static_cast<int>(lhs) & static_cast<int>(rhs));
+    }
+
     class Drawable : public Transformable
     {
         private:
@@ -49,6 +66,7 @@ namespace Coronet
             virtual Vector2 GetDrawPosition(bool includeCamera = false);
             virtual Vector2 GetDrawSize();
             virtual Visibility GetVisibility();
+            virtual Flip GetFlip();
             virtual bool IsVisible();
 
             virtual void Load(DependencyManager &dependencies);
@@ -59,6 +77,7 @@ namespace Coronet
             Vector2 Position = { 0, 0 };
             DrawablePositionSpace Space = DrawablePositionSpace::World;
             Visibility Visibility = Visibility::Visible;
+            Flip Flip = Flip::None;
 
             // todo: dont like callComplete
             virtual void Inject(DependencyManager &dependencies, bool callComplete = true);
