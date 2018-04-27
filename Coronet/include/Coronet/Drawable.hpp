@@ -65,6 +65,7 @@ namespace Coronet
             //
             virtual Vector2 GetDrawPosition(bool includeCamera = false);
             virtual Vector2 GetDrawSize();
+            virtual DrawablePositionSpace GetSpace();
             virtual Visibility GetVisibility();
             virtual Flip GetFlip();
 
@@ -74,7 +75,7 @@ namespace Coronet
         public:
             std::weak_ptr<Drawable> Parent;
             Vector2 Position = { 0, 0 };
-            DrawablePositionSpace Space = DrawablePositionSpace::World; //todo: inherit from parent
+            DrawablePositionSpace Space = DrawablePositionSpace::World;
             Visibility Visibility = Visibility::Visible;
             Flip Flip = Flip::None;
 
