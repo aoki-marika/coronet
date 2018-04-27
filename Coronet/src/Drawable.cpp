@@ -6,7 +6,7 @@ namespace Coronet
     {
         Vector2 position = Position;
 
-        if (includeCamera && Space == DrawablePositionSpace::World)
+        if (includeCamera && GetSpace() == DrawablePositionSpace::World)
             position = position - camera->Position;
 
         if (!Parent.expired())
@@ -18,6 +18,20 @@ namespace Coronet
     Vector2 Drawable::GetDrawSize()
     {
         return { 0, 0 };
+    }
+
+    DrawablePositionSpace Drawable::GetSpace()
+    {
+        if (!Parent.expired())
+        {
+            auto parentSpace = Parent.lock()->GetSpace();
+
+            // for world space drawables in a screen space container, the container is the world
+            if (parentSpace == DrawablePositionSpace::Screen)
+                return parentSpace;
+        }
+
+        return Space;
     }
 
     Visibility Drawable::GetVisibility()
@@ -69,7 +83,7 @@ namespace Coronet
         SDL_Rect v = camera->GetViewport();
 
         // ignore camera position if we are in screen space
-        if (Space == DrawablePositionSpace::Screen)
+        if (GetSpace() == DrawablePositionSpace::Screen)
         {
             v.x = 0;
             v.y = 0;

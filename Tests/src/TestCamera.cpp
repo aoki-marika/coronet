@@ -8,19 +8,22 @@ namespace Tests
     TestCamera::TestCamera()
     {
         auto bitmap = std::make_shared<Coronet::Bitmap>("test.png");
+        auto screenContainer = std::make_shared<Coronet::Container>();
         auto screen = std::make_shared<Coronet::Sprite>(bitmap);
         world = std::make_shared<Coronet::Sprite>(bitmap);
         worldVisibleText = std::make_shared<Coronet::Text>(std::make_shared<Coronet::TTFFont>("HelvetiPixel.ttf", 15));
 
-        screen->Space = Coronet::DrawablePositionSpace::Screen;
-        screen->Position = { 104, 96 };
+        screenContainer->Space = Coronet::DrawablePositionSpace::Screen;
+        screenContainer->Position = { 104, 96 };
 
         world->Position = { -16, 16 };
 
         worldVisibleText->Space = Coronet::DrawablePositionSpace::Screen;
         worldVisibleText->SetText("world is visible");
 
-        Add(screen);
+        screenContainer->Add(screen);
+
+        Add(screenContainer);
         Add(world);
         Add(worldVisibleText);
     }
