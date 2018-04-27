@@ -59,6 +59,7 @@ namespace Coronet
                     i = frames.size() - 1;
 
                 currentFrameIndex = i;
+                currentFrameTicks = 0;
                 displayFrame(currentFrameIndex);
             }
 
