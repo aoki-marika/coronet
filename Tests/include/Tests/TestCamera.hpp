@@ -1,12 +1,11 @@
+#include <Coronet/TestCase.hpp>
 #include <Coronet/Camera.hpp>
 #include <Coronet/Sprite.hpp>
 #include <Coronet/Text.hpp>
 
-#include "TestCase.hpp"
-
 namespace Tests
 {
-    class TestCamera : public TestCase
+    class TestCamera : public Coronet::TestCase
     {
         private:
             std::shared_ptr<Coronet::Sprite> world;

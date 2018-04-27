@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Coronet/Container.hpp>
+#include "Container.hpp"
 
-namespace Tests
+namespace Coronet
 {
-    class TestCase : public Coronet::Container
+    class TestCase : public Container
     {
         // blank class for now, but will get more functionality later
     };

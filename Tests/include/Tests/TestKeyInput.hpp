@@ -1,11 +1,10 @@
+#include <Coronet/TestCase.hpp>
 #include <Coronet/Container.hpp>
 #include <Coronet/Sprite.hpp>
 
-#include "TestCase.hpp"
-
 namespace Tests
 {
-    class TestKeyInput : public TestCase
+    class TestKeyInput : public Coronet::TestCase
     {
         public:
             TestKeyInput();
