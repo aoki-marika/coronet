@@ -127,6 +127,16 @@ namespace Coronet
         return false;
     }
 
+    void Drawable::Hide()
+    {
+        Visibility = Visibility::Hidden;
+    }
+
+    void Drawable::Show()
+    {
+        Visibility = Visibility::Visible;
+    }
+
     void Drawable::Update()
     {
         UpdateTransforms(clock);

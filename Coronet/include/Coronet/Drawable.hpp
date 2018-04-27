@@ -85,6 +85,8 @@ namespace Coronet
             virtual void Inject(DependencyManager &dependencies, bool callComplete = true);
             virtual bool OnKeyDown(SDL_Event event);
             virtual bool OnKeyUp(SDL_Event event);
+            virtual void Hide();
+            virtual void Show();
             virtual void Update();
             virtual void Draw(SDL_Renderer *renderer);
     };

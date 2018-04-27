@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Container.hpp"
 
 namespace Coronet
@@ -41,7 +43,7 @@ namespace Coronet
 
     void Container::Remove(const std::shared_ptr<Drawable> &drawable)
     {
-        if (std::find(children.begin(), children.end(), drawable) != children.end())
+        if (std::find(children.begin(), children.end(), drawable) == children.end())
             throw std::invalid_argument("Cannot remove a Drawable from a Container it is not in.");
 
         children.erase(std::remove(children.begin(), children.end(), drawable), children.end());
