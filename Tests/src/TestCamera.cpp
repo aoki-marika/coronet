@@ -1,4 +1,4 @@
-#include <Coronet/Sprite.hpp>
+#include <Coronet/TTFFont.hpp>
 #include <Coronet/Metrics.hpp>
 
 #include "TestCamera.hpp"
@@ -9,16 +9,20 @@ namespace Tests
     {
         auto bitmap = std::make_shared<Coronet::Bitmap>("test.png");
         auto screen = std::make_shared<Coronet::Sprite>(bitmap);
-        auto world = std::make_shared<Coronet::Sprite>(bitmap);
+        world = std::make_shared<Coronet::Sprite>(bitmap);
+        worldVisibleText = std::make_shared<Coronet::Text>(std::make_shared<Coronet::TTFFont>("HelvetiPixel.ttf", 15));
 
-        // todo: indicate when the sprites are offscreen
         screen->Space = Coronet::DrawablePositionSpace::Screen;
         screen->Position = { 104, 96 };
 
         world->Position = { -16, 16 };
 
+        worldVisibleText->Space = Coronet::DrawablePositionSpace::Screen;
+        worldVisibleText->SetText("world is visible");
+
         Add(screen);
         Add(world);
+        Add(worldVisibleText);
     }
 
     void TestCamera::Load(Coronet::DependencyManager &dependencies)
@@ -64,5 +68,12 @@ namespace Tests
         {
             camera->Position.y = value;
         }));
+    }
+
+    void TestCamera::Update()
+    {
+        TestCase::Update();
+
+        worldVisibleText->Visibility = world->IsVisible() ? Coronet::Visibility::Visible : Coronet::Visibility::Hidden;
     }
 }

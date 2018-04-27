@@ -67,7 +67,6 @@ namespace Coronet
             virtual Vector2 GetDrawSize();
             virtual Visibility GetVisibility();
             virtual Flip GetFlip();
-            virtual bool IsVisible();
 
             virtual void Load(DependencyManager &dependencies);
             virtual void LoadComplete();
@@ -78,6 +77,8 @@ namespace Coronet
             DrawablePositionSpace Space = DrawablePositionSpace::World; //todo: inherit from parent
             Visibility Visibility = Visibility::Visible;
             Flip Flip = Flip::None;
+
+            virtual bool IsVisible();
 
             // todo: dont like callComplete
             virtual void Inject(DependencyManager &dependencies, bool callComplete = true);
