@@ -6,6 +6,7 @@ This framework was made for a more specific project, but generalised to allow it
 ## Requirements
 * SDL2
 * SDL2_image
+* SDL2_ttf
 
 ## Compiling
 Tested under macOS 10.13.2.
