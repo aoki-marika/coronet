@@ -23,6 +23,12 @@ namespace Coronet
         }
     }
 
+    Bitmap::Bitmap(SDL_Surface *surface)
+    {
+        this->surface = surface;
+        size = { surface->w, surface->h };
+    }
+
     Bitmap::~Bitmap()
     {
         if (surface != NULL)

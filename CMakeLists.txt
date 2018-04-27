@@ -15,9 +15,11 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 # Find and include SDL2
 find_package(SDL2 REQUIRED)
 find_package(SDL2_IMAGE REQUIRED)
+find_package(SDL2_TTF REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${SDL2_IMAGE_INCLUDE_DIR})
+include_directories(${SDL2_TTF_INCLUDE_DIR})
 
 # Include sub-projects
 add_subdirectory(Coronet)

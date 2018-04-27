@@ -75,7 +75,7 @@ namespace Coronet
         public:
             std::weak_ptr<Drawable> Parent;
             Vector2 Position = { 0, 0 };
-            DrawablePositionSpace Space = DrawablePositionSpace::World;
+            DrawablePositionSpace Space = DrawablePositionSpace::World; //todo: inherit from parent
             Visibility Visibility = Visibility::Visible;
             Flip Flip = Flip::None;
 
