@@ -18,6 +18,7 @@ namespace Coronet
 
         public:
             Bitmap(const char *path);
+            Bitmap(SDL_Surface *surface);
             ~Bitmap();
 
             Vector2 GetSize();

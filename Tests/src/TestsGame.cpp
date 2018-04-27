@@ -10,6 +10,7 @@
 #include "TestAnimation.hpp"
 #include "TestKeyInput.hpp"
 #include "TestFlip.hpp"
+#include "TestText.hpp"
 
 namespace Tests
 {
@@ -25,6 +26,7 @@ namespace Tests
         else if (strcmp(testName, "Animation") == 0) test = std::make_shared<TestAnimation>();
         else if (strcmp(testName, "KeyInput") == 0) test = std::make_shared<TestKeyInput>();
         else if (strcmp(testName, "Flip") == 0) test = std::make_shared<TestFlip>();
+        else if (strcmp(testName, "Text") == 0) test = std::make_shared<TestText>();
         else
         {
             std::stringstream message;

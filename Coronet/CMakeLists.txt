@@ -11,4 +11,4 @@ add_library(Coronet ${Coronet_src})
 target_include_directories(Coronet PUBLIC include)
 
 # Link dependencies
-target_link_libraries(Coronet ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARY})
+target_link_libraries(Coronet ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})
