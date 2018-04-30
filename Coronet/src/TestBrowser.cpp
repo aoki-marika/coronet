@@ -23,7 +23,13 @@ namespace Coronet
 
     void TestBrowser::selectItem(int index)
     {
-        arrow->Position = { -ITEM_HEIGHT, ITEM_HEIGHT * index };
+        if (testTypes.size() > 0)
+        {
+            arrow->Visibility = Visibility::Visible;
+            arrow->Position = { -ITEM_HEIGHT, ITEM_HEIGHT * index };
+        }
+        else
+            arrow->Visibility = Visibility::Hidden;
     }
 
     void TestBrowser::AddTest(std::type_index testType)
@@ -34,6 +40,7 @@ namespace Coronet
 
         items->Add(item);
         testTypes.push_back(testType);
+        selectItem(selectedItem);
     }
 
     bool TestBrowser::OnKeyDown(SDL_Event event)
@@ -47,7 +54,7 @@ namespace Coronet
                 selectedItem++;
                 break;
             case SDLK_RETURN:
-                if (OnSelectTest != nullptr)
+                if (testTypes.size() > 0 && OnSelectTest != nullptr)
                     OnSelectTest(testTypes[selectedItem]);
                 break;
             default:
