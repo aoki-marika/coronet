@@ -28,6 +28,11 @@ namespace Tests
         Add(worldVisibleText);
     }
 
+    TestCamera::~TestCamera()
+    {
+        camera->Position = { 0, 0 };
+    }
+
     void TestCamera::Load(Coronet::DependencyManager &dependencies)
     {
         TestCase::Load(dependencies);
@@ -40,37 +45,37 @@ namespace Tests
     {
         TestCase::LoadComplete();
 
-        int offset = 100;
+        int positionOffset = 100;
 
-        AddTransform(Coronet::Transform(0, screenSize.x + offset, 1000, 1500, Coronet::Easing::None, [this] (double value)
+        AddRelativeTransform(0, screenSize.x + positionOffset, 1000, 500, Coronet::Easing::None, [this] (double value)
         {
             camera->Position.x = value;
-        }));
+        });
 
-        AddTransform(Coronet::Transform(screenSize.x + offset, -screenSize.x - offset, 1500, 2000, Coronet::Easing::None, [this] (double value)
+        AddRelativeTransform(screenSize.x + positionOffset, -screenSize.x - positionOffset, 1500, 500, Coronet::Easing::None, [this] (double value)
         {
             camera->Position.x = value;
-        }));
+        });
 
-        AddTransform(Coronet::Transform(-screenSize.x - offset, 0, 2000, 2500, Coronet::Easing::None, [this] (double value)
+        AddRelativeTransform(-screenSize.x - positionOffset, 0, 2000, 500, Coronet::Easing::None, [this] (double value)
         {
             camera->Position.x = value;
-        }));
+        });
 
-        AddTransform(Coronet::Transform(0, screenSize.y + offset, 2500, 3000, Coronet::Easing::None, [this] (double value)
+        AddRelativeTransform(0, screenSize.y + positionOffset, 2500, 500, Coronet::Easing::None, [this] (double value)
         {
             camera->Position.y = value;
-        }));
+        });
 
-        AddTransform(Coronet::Transform(screenSize.y + offset, -screenSize.y - offset, 3000, 3500, Coronet::Easing::None, [this] (double value)
+        AddRelativeTransform(screenSize.y + positionOffset, -screenSize.y - positionOffset, 3000, 500, Coronet::Easing::None, [this] (double value)
         {
             camera->Position.y = value;
-        }));
+        });
 
-        AddTransform(Coronet::Transform(-screenSize.y - offset, 0, 3500, 4000, Coronet::Easing::None, [this] (double value)
+        AddRelativeTransform(-screenSize.y - positionOffset, 0, 3500, 500, Coronet::Easing::None, [this] (double value)
         {
             camera->Position.y = value;
-        }));
+        });
     }
 
     void TestCamera::Update()

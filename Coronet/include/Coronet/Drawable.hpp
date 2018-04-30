@@ -87,6 +87,7 @@ namespace Coronet
             virtual bool OnKeyUp(SDL_Event event);
             virtual void Hide();
             virtual void Show();
+            virtual void AddRelativeTransform(double startValue, double endValue, double delay, double duration, Easing easing, std::function<void(double)> callback, std::function<void()> onFinished = nullptr);
             virtual void Update();
             virtual void Draw(SDL_Renderer *renderer);
     };

@@ -19,6 +19,7 @@ namespace Tests
 
         public:
             TestCamera();
+            ~TestCamera();
             void Update() override;
     };
 }

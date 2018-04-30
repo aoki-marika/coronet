@@ -137,6 +137,12 @@ namespace Coronet
         Visibility = Visibility::Visible;
     }
 
+    void Drawable::AddRelativeTransform(double startValue, double endValue, double delay, double duration, Easing easing, std::function<void(double)> callback, std::function<void()> onFinished)
+    {
+        Uint32 t = clock->GetTicks();
+        AddTransform(Transform(startValue, endValue, t + delay, t + delay + duration, easing, callback, onFinished));
+    }
+
     void Drawable::Update()
     {
         UpdateTransforms(clock);
