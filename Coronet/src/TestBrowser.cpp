@@ -3,6 +3,7 @@
 #include "TestBrowser.hpp"
 #include "Utilities.hpp"
 #include "Text.hpp"
+#include "Metrics.hpp"
 
 namespace Coronet
 {
@@ -18,6 +19,13 @@ namespace Coronet
         items->Add(arrow);
 
         Add(items);
+    }
+
+    void TestBrowser::Load(DependencyManager &dependencies)
+    {
+        Container::Load(dependencies);
+
+        maximumItems = int(dependencies.Get<Metrics>()->GetScreenSize().y / 12);
         selectItem(selectedItem);
     }
 
@@ -27,6 +35,15 @@ namespace Coronet
         {
             arrow->Visibility = Visibility::Visible;
             arrow->Position = { -ITEM_HEIGHT, ITEM_HEIGHT * index };
+
+            int upperVisible = firstVisibleItem + std::max(0, maximumItems - 1);
+
+            if (index > upperVisible)
+                firstVisibleItem = (index - maximumItems) + 1;
+            else if (index < firstVisibleItem)
+                firstVisibleItem = index;
+
+            items->Position.y = -(ITEM_HEIGHT * firstVisibleItem);
         }
         else
             arrow->Visibility = Visibility::Hidden;
