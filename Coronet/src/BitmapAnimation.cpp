@@ -8,7 +8,7 @@ namespace Coronet
         Add(sprite);
     }
 
-    void BitmapAnimation::DisplayFrame(std::shared_ptr<Bitmap> &frame)
+    void BitmapAnimation::DisplayFrame(const std::shared_ptr<Bitmap> &frame)
     {
         sprite->SetBitmap(frame);
     }

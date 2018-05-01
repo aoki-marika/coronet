@@ -9,7 +9,7 @@ namespace Coronet
             std::shared_ptr<Sprite> sprite;
 
         protected:
-            void DisplayFrame(std::shared_ptr<Bitmap> &frame) override;
+            void DisplayFrame(const std::shared_ptr<Bitmap> &frame) override;
 
         public:
             BitmapAnimation();

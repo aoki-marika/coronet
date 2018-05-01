@@ -2,7 +2,7 @@
 
 namespace Coronet
 {
-    Text::Text(std::shared_ptr<Font> font)
+    Text::Text(const std::shared_ptr<Font> &font)
     {
         this->font = font;
         this->colour = { 255, 255, 255 };
