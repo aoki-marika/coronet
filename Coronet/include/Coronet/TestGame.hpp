@@ -22,14 +22,16 @@ namespace Coronet
 
             virtual bool OnKeyDown(SDL_Event event) override;
 
-            // not a huge fan of this implementation, but C++ generic types cannot do what I want them to.
-
-            template <typename T> void RegisterTest(std::function<std::shared_ptr<TestCase>()> createTest)
+            template <typename T> void RegisterTest()
             {
                 // ensure that T is a TestCase
                 (void)static_cast<TestCase *>((T *)0);
 
-                tests[typeid(T)] = createTest;
+                tests[typeid(T)] = [] ()
+                {
+                    return std::make_shared<T>();
+                };
+
                 browser->AddTest(typeid(T));
             }
     };
