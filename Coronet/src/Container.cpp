@@ -14,7 +14,7 @@ namespace Coronet
                 //
                 // this is required for children that are added in the ctor, as
                 // shared_from_this, and in turn weak_from_this, cannot get a
-                // pointer in the ctor, leaving the parent as null
+                // pointer in the ctor, leaving the parent as a nullptr
                 //
                 c->Parent = weak_from_this();
                 c->Inject(dependencies);
@@ -41,7 +41,7 @@ namespace Coronet
 
     void Container::Remove(const std::shared_ptr<Drawable> &drawable)
     {
-        if (std::find(children.begin(), children.end(), drawable) != children.end())
+        if (std::find(children.begin(), children.end(), drawable) == children.end())
             throw std::invalid_argument("Cannot remove a Drawable from a Container it is not in.");
 
         children.erase(std::remove(children.begin(), children.end(), drawable), children.end());

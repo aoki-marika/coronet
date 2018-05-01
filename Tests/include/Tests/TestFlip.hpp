@@ -1,8 +1,8 @@
-#include "TestCase.hpp"
+#include <Coronet/TestCase.hpp>
 
 namespace Tests
 {
-    class TestFlip : public TestCase
+    class TestFlip : public Coronet::TestCase
     {
         public:
             TestFlip();

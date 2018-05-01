@@ -1,8 +1,8 @@
-#include "TestCase.hpp"
+#include <Coronet/TestCase.hpp>
 
 namespace Tests
 {
-    class TestContainer : public TestCase
+    class TestContainer : public Coronet::TestCase
     {
         public:
             void Load(Coronet::DependencyManager &dependencies) override;

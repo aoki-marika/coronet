@@ -1,10 +1,9 @@
+#include <Coronet/TestCase.hpp>
 #include <Coronet/TiledTexture.hpp>
-
-#include "TestCase.hpp"
 
 namespace Tests
 {
-    class TestTiledTexture : public TestCase
+    class TestTiledTexture : public Coronet::TestCase
     {
         private:
             std::shared_ptr<Coronet::TiledTexture> tiled;

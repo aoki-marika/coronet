@@ -1,8 +1,8 @@
-#include "TestCase.hpp"
+#include <Coronet/TestCase.hpp>
 
 namespace Tests
 {
-    class TestSprite : public TestCase
+    class TestSprite : public Coronet::TestCase
     {
         public:
             TestSprite();

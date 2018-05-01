@@ -1,10 +1,9 @@
+#include <Coronet/TestCase.hpp>
 #include <Coronet/BitmapAnimation.hpp>
-
-#include "TestCase.hpp"
 
 namespace Tests
 {
-    class TestAnimation : public TestCase
+    class TestAnimation : public Coronet::TestCase
     {
         private:
             std::shared_ptr<Coronet::BitmapAnimation> animation;
