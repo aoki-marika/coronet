@@ -117,6 +117,22 @@ namespace Coronet
         }
     }
 
+    bool Drawable::TriggerKeyDown(SDL_Event event)
+    {
+        if (GetVisibility() == Visibility::Visible)
+            return OnKeyDown(event);
+
+        return false;
+    }
+
+    bool Drawable::TriggerKeyUp(SDL_Event event)
+    {
+        if (GetVisibility() == Visibility::Visible)
+            return OnKeyUp(event);
+
+        return false;
+    }
+
     bool Drawable::OnKeyDown(SDL_Event event)
     {
         return false;
