@@ -6,5 +6,6 @@ namespace Coronet
             static char *GetExecutablePath();
             static char *GetExecutableDirectory();
             static const char *GetPathSeparator();
+            static const char *PathRelativeToExecutable(const char *path);
     };
 }

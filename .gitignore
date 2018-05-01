@@ -1,5 +1,6 @@
 # Project specific
 bin/Tests
+bin/*.assets.zip
 lib/
 coronet.log
 

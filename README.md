@@ -7,6 +7,7 @@ This framework was made for a more specific project, but generalised to allow it
 * SDL2
 * SDL2_image
 * SDL2_ttf
+* PhysicsFS
 
 ## Compiling
 Tested under macOS 10.13.2.
