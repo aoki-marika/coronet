@@ -20,7 +20,7 @@ namespace Coronet
             }
 
         protected:
-            virtual void DisplayFrame(T &frame) = 0;
+            virtual void DisplayFrame(const T &frame) = 0;
 
             virtual void Load(DependencyManager &dependencies) override
             {
