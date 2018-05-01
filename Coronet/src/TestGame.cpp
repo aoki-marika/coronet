@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "TestGame.hpp"
 
 namespace Coronet
@@ -19,7 +17,10 @@ namespace Coronet
     void TestGame::showTest(std::type_index testType)
     {
         if (currentTest != nullptr)
+        {
             Remove(currentTest);
+            currentTest.reset();
+        }
 
         currentTest = tests[testType]();
         Add(currentTest);

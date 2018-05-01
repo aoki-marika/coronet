@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "TestBrowser.hpp"
 #include "Utilities.hpp"
 #include "Text.hpp"

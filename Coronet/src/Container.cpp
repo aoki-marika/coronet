@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Container.hpp"
 
 namespace Coronet
