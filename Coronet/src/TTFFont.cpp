@@ -18,6 +18,11 @@ namespace Coronet
         }
     }
 
+    TTFFont::TTFFont(TTF_Font *font)
+    {
+        this->font = font;
+    }
+
     TTFFont::~TTFFont()
     {
         TTF_CloseFont(font);

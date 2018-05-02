@@ -16,7 +16,7 @@ namespace Coronet
 
             void Mount(const char *path);
 
-            template<typename T> T Read(const char *path)
+            template<typename T, typename... Args> T Read(const char *path, Args&&... args)
             {
                 PHYSFS_File *file = PHYSFS_openRead(path);
 
@@ -39,7 +39,7 @@ namespace Coronet
                 }
 
                 PHYSFS_close(file);
-                return T(buffer, length);
+                return { buffer, length, args... };
             }
     };
 }

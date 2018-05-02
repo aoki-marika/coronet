@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <SDL2/SDL_ttf.h>
 
@@ -12,6 +14,7 @@ namespace Coronet
 
         public:
             TTFFont(const char *path, int ptsize);
+            TTFFont(TTF_Font *font);
             ~TTFFont();
 
             std::shared_ptr<Bitmap> GetTextBitmap(std::string text, SDL_Color textColour) override;
