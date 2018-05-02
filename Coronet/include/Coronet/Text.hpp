@@ -13,6 +13,7 @@ namespace Coronet
             SDL_Colour colour; //defaults to white
 
         public:
+            // todo: add partial ctors for quickly setting text/colour
             Text(const std::shared_ptr<Font> &font);
 
             void SetText(std::string text);

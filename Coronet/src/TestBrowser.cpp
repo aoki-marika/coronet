@@ -1,4 +1,5 @@
 #include "TestBrowser.hpp"
+#include "TestBrowserItem.hpp"
 #include "Utilities.hpp"
 #include "Text.hpp"
 #include "Metrics.hpp"
@@ -14,7 +15,7 @@ namespace Coronet
         Space = DrawablePositionSpace::Screen;
 
         items = std::make_shared<Container>();
-        items->Position = { ITEM_HEIGHT, 0 };
+        items->Position = { TestBrowserItem::HEIGHT, 0 };
 
         Add(items);
     }
@@ -25,7 +26,6 @@ namespace Coronet
 
         auto assets = dependencies.Get<AssetStore>();
 
-        font = assets->GetTTF("HelvetiPixel.ttf", 15);
         arrow = std::make_shared<Sprite>(assets->GetBitmap("test-selection.png"));
 
         items->Add(arrow);
@@ -34,30 +34,12 @@ namespace Coronet
         selectItem(selectedItem);
     }
 
-    void TestBrowser::LoadComplete()
-    {
-        Container::LoadComplete();
-
-        // add all the items that were added before we were loaded
-        for (int i = 0; i < testTypes.size(); i++)
-            addItem(testTypes[i], i);
-    }
-
-    void TestBrowser::addItem(std::type_index testType, int index)
-    {
-        auto item = std::make_shared<Text>(font);
-        item->SetText(Demangle(testType.name()));
-        item->Position = { 0, ITEM_HEIGHT * index };
-
-        items->Add(item);
-    }
-
     void TestBrowser::selectItem(int index)
     {
         if (testTypes.size() > 0)
         {
             arrow->Visibility = Visibility::Visible;
-            arrow->Position = { -ITEM_HEIGHT, ITEM_HEIGHT * index };
+            arrow->Position = { -TestBrowserItem::HEIGHT, TestBrowserItem::HEIGHT * index };
 
             int upperVisible = firstVisibleItem + std::max(0, maximumItems - 1);
 
@@ -66,7 +48,7 @@ namespace Coronet
             else if (index < firstVisibleItem)
                 firstVisibleItem = index;
 
-            items->Position.y = -(ITEM_HEIGHT * firstVisibleItem);
+            items->Position.y = -(TestBrowserItem::HEIGHT * firstVisibleItem);
         }
         else
             arrow->Visibility = Visibility::Hidden;
@@ -74,10 +56,11 @@ namespace Coronet
 
     void TestBrowser::AddTest(std::type_index testType)
     {
-        testTypes.push_back(testType);
+        auto item = std::make_shared<TestBrowserItem>(testType);
+        item->Position = { 0, TestBrowserItem::HEIGHT * static_cast<int>(testTypes.size()) };
+        items->Add(item);
 
-        if (State != DrawableLoadState::Unloaded)
-            addItem(testType, static_cast<int>(testTypes.size()) - 1);
+        testTypes.push_back(testType);
     }
 
     bool TestBrowser::OnKeyDown(SDL_Event event)
