@@ -9,6 +9,11 @@ namespace Coronet
         tileSize = { tileWidth, tileHeight };
     }
 
+    BitmapSheet::BitmapSheet(SDL_Surface *surface, int tileWidth, int tileHeight) : Bitmap(surface)
+    {
+        tileSize = { tileWidth, tileHeight };
+    }
+
     BitmapSheet::~BitmapSheet()
     {
         if (texture != nullptr)

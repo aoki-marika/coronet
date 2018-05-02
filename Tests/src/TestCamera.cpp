@@ -1,17 +1,30 @@
 #include <Coronet/TTFFont.hpp>
 #include <Coronet/Metrics.hpp>
+#include <Coronet/AssetStore.hpp>
 
 #include "TestCamera.hpp"
 
 namespace Tests
 {
-    TestCamera::TestCamera()
+    TestCamera::~TestCamera()
     {
-        auto bitmap = std::make_shared<Coronet::Bitmap>("test.png");
+        camera->Position = { 0, 0 };
+    }
+
+    void TestCamera::Load(Coronet::DependencyManager &dependencies)
+    {
+        TestCase::Load(dependencies);
+
+        camera = dependencies.Get<Coronet::Camera>();
+        screenSize = dependencies.Get<Coronet::Metrics>()->GetScreenSize();
+
+        auto assets = dependencies.Get<Coronet::AssetStore>();
+
+        auto bitmap = assets->GetBitmap("test.png");
         auto screenContainer = std::make_shared<Coronet::Container>();
         auto screen = std::make_shared<Coronet::Sprite>(bitmap);
         world = std::make_shared<Coronet::Sprite>(bitmap);
-        worldVisibleText = std::make_shared<Coronet::Text>(std::make_shared<Coronet::TTFFont>("HelvetiPixel.ttf", 15));
+        worldVisibleText = std::make_shared<Coronet::Text>(assets->GetTTF("HelvetiPixel.ttf", 15));
 
         screenContainer->Space = Coronet::DrawablePositionSpace::Screen;
         screenContainer->Position = { 104, 96 };
@@ -26,19 +39,6 @@ namespace Tests
         Add(screenContainer);
         Add(world);
         Add(worldVisibleText);
-    }
-
-    TestCamera::~TestCamera()
-    {
-        camera->Position = { 0, 0 };
-    }
-
-    void TestCamera::Load(Coronet::DependencyManager &dependencies)
-    {
-        TestCase::Load(dependencies);
-
-        camera = dependencies.Get<Coronet::Camera>();
-        screenSize = dependencies.Get<Coronet::Metrics>()->GetScreenSize();
     }
 
     void TestCamera::LoadComplete()

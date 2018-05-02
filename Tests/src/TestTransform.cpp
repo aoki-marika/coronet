@@ -1,4 +1,5 @@
 #include <Coronet/Metrics.hpp>
+#include <Coronet/AssetStore.hpp>
 
 #include "TestTransform.hpp"
 
@@ -8,7 +9,7 @@ namespace Tests
     {
         TestCase::Load(dependencies);
 
-        auto bitmap = std::make_shared<Coronet::Bitmap>("test.png");
+        auto bitmap = dependencies.Get<Coronet::AssetStore>()->GetBitmap("test.png");
         sprite = std::make_shared<Coronet::Sprite>(bitmap);
 
         start = { 0, 0 };

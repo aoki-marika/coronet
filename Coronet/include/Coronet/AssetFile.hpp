@@ -29,6 +29,9 @@ namespace Coronet
 
             ~AssetFile()
             {
+                // todo: assets deallocating too soon and breaking fonts
+                // inheriting from the base class would be better, so the
+                // file and asset are tied together
                 SDL_RWclose(rw);
                 delete buffer;
             }

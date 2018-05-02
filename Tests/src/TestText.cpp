@@ -1,14 +1,19 @@
 #include <Coronet/TTFFont.hpp>
 #include <Coronet/Text.hpp>
+#include <Coronet/AssetStore.hpp>
 
 #include "TestText.hpp"
 
 namespace Tests
 {
-    TestText::TestText()
+    void TestText::Load(Coronet::DependencyManager &dependencies)
     {
-        auto fontOne = std::make_shared<Coronet::TTFFont>("HelvetiPixel.ttf", 15);
-        auto fontTwo = std::make_shared<Coronet::TTFFont>("HelvetiPixel.ttf", 48);
+        TestCase::Load(dependencies);
+
+        auto assets = dependencies.Get<Coronet::AssetStore>();
+
+        auto fontOne = assets->GetTTF("HelvetiPixel.ttf", 15);
+        auto fontTwo = assets->GetTTF("HelvetiPixel.ttf", 48);
 
         auto textOne = std::make_shared<Coronet::Text>(fontOne);
         auto textTwo = std::make_shared<Coronet::Text>(fontTwo);

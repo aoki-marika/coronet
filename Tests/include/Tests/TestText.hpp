@@ -4,7 +4,7 @@ namespace Tests
 {
     class TestText : public Coronet::TestCase
     {
-        public:
-            TestText();
+        protected:
+            void Load(Coronet::DependencyManager &dependencies) override;
     };
 }

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Bitmap.hpp"
 #include "Tile.hpp"
 
@@ -12,6 +14,7 @@ namespace Coronet
 
         public:
             BitmapSheet(const char* path, int tileWidth, int tileHeight);
+            BitmapSheet(SDL_Surface* surface, int tileWidth, int tileHeight);
             ~BitmapSheet();
 
             Vector2 GetTileSize();

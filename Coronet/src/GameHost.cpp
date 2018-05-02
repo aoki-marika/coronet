@@ -14,11 +14,15 @@ namespace Coronet
         renderer = std::make_shared<Renderer>(window);
         camera = std::make_shared<Camera>(s.x, s.y);
         clock = std::make_shared<GameClock>();
+        assets = std::make_shared<AssetStore>();
+
+        assets->Mount("Coronet.assets.zip");
 
         dependencies.Register<Metrics>(metrics);
         dependencies.Register<Renderer>(renderer);
         dependencies.Register<Camera>(camera);
         dependencies.Register<GameClock>(clock);
+        dependencies.Register<AssetStore>(assets);
     }
 
     void GameHost::Run(const std::shared_ptr<Game> &game)

@@ -9,9 +9,7 @@ namespace Tests
             std::shared_ptr<Coronet::TiledTexture> tiled;
 
         protected:
+            void Load(Coronet::DependencyManager &dependencies) override;
             void LoadComplete() override;
-
-        public:
-            TestTiledTexture();
     };
 }

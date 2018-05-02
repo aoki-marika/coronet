@@ -4,7 +4,7 @@ namespace Tests
 {
     class TestSprite : public Coronet::TestCase
     {
-        public:
-            TestSprite();
+        protected:
+            void Load(Coronet::DependencyManager &dependencies) override;
     };
 }

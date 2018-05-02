@@ -1,13 +1,16 @@
 #include <Coronet/Sprite.hpp>
 #include <Coronet/Container.hpp>
+#include <Coronet/AssetStore.hpp>
 
 #include "TestFlip.hpp"
 
 namespace Tests
 {
-    TestFlip::TestFlip()
+    void TestFlip::Load(Coronet::DependencyManager &dependencies)
     {
-        auto arrow = std::make_shared<Coronet::Bitmap>("direction.png");
+        TestCase::Load(dependencies);
+
+        auto arrow = dependencies.Get<Coronet::AssetStore>()->GetBitmap("direction.png");
 
         // end result should be (from left to right):
         //

@@ -1,10 +1,14 @@
+#include <Coronet/AssetStore.hpp>
+
 #include "TestTiledTexture.hpp"
 
 namespace Tests
 {
-    TestTiledTexture::TestTiledTexture()
+    void TestTiledTexture::Load(Coronet::DependencyManager &dependencies)
     {
-        auto sheet = std::make_shared<Coronet::BitmapSheet>("tiles.png", 8, 8);
+        TestCase::Load(dependencies);
+
+        auto sheet = dependencies.Get<Coronet::AssetStore>()->GetBitmapSheet("tiles.png", 8, 8);
         sheet->SetColourKey(255, 0, 255);
 
         tiled = std::make_shared<Coronet::TiledTexture>(sheet, 10, 10);

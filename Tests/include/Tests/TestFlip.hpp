@@ -4,7 +4,7 @@ namespace Tests
 {
     class TestFlip : public Coronet::TestCase
     {
-        public:
-            TestFlip();
+        protected:
+            void Load(Coronet::DependencyManager &dependencies) override;
     };
 }

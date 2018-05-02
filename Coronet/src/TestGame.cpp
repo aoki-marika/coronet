@@ -1,4 +1,5 @@
 #include "TestGame.hpp"
+#include "AssetStore.hpp"
 
 namespace Coronet
 {
@@ -12,6 +13,13 @@ namespace Coronet
         };
 
         Add(browser);
+    }
+
+    void TestGame::Load(DependencyManager &dependencies)
+    {
+        Game::Load(dependencies);
+
+        dependencies.Get<AssetStore>()->Mount("Tests.assets.zip");
     }
 
     void TestGame::showTest(std::type_index testType)
