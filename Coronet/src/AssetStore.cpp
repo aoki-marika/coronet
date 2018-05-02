@@ -1,6 +1,4 @@
 #include <sstream>
-#include <iostream>
-#include <physfs.h>
 
 #include "AssetStore.hpp"
 #include "System.hpp"
@@ -36,31 +34,5 @@ namespace Coronet
             message << "Failed to mount archive at '" << fullPath << "'";
             throwPhysfsException(message.str());
         }
-    }
-
-    AssetFile AssetStore::Read(const char *path)
-    {
-        PHYSFS_File *file = PHYSFS_openRead(path);
-
-        if (file == nullptr)
-        {
-            std::stringstream message;
-            message << "Failed to read file at '" << path << "'";
-            throwPhysfsException(message.str());
-        }
-
-        int length = PHYSFS_fileLength(file);
-        char *buffer = new char[length];
-        int lengthRead = PHYSFS_readBytes(file, buffer, length);
-
-        if (lengthRead == -1)
-        {
-            std::stringstream message;
-            message << "Failed to read file at '" << path << "'";
-            throwPhysfsException(message.str());
-        }
-
-        PHYSFS_close(file);
-        return AssetFile(buffer, length);
     }
 }
