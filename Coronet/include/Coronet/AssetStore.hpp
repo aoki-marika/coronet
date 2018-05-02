@@ -2,7 +2,6 @@
 #include <sstream>
 #include <physfs.h>
 
-#include "AssetFile.hpp"
 #include "Bitmap.hpp"
 #include "BitmapSheet.hpp"
 #include "TTFFont.hpp"
@@ -23,7 +22,7 @@ namespace Coronet
             std::shared_ptr<BitmapSheet> GetBitmapSheet(std::string path, int tileWidth, int tileHeight);
             std::shared_ptr<TTFFont> GetTTF(std::string path, int ptsize);
 
-            template<typename T, typename... Args> T Get(std::string path, Args&&... args)
+            template<typename T, typename... Args> std::shared_ptr<T> Get(std::string path, Args&&... args)
             {
                 const char *fullPath = ("assets/" + path).c_str();
                 PHYSFS_File *file = PHYSFS_openRead(fullPath);
@@ -36,7 +35,7 @@ namespace Coronet
                 }
 
                 int length = PHYSFS_fileLength(file);
-                char *buffer = new char[length];
+                char *buffer[length];
                 int lengthRead = PHYSFS_readBytes(file, buffer, length);
 
                 if (lengthRead == -1)
@@ -47,7 +46,7 @@ namespace Coronet
                 }
 
                 PHYSFS_close(file);
-                return { buffer, length, args... };
+                return std::make_shared<T>(SDL_RWFromMem(buffer, length), args...);
             }
     };
 }

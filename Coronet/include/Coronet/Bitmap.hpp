@@ -11,6 +11,7 @@ namespace Coronet
         private:
             Vector2 size;
             SDL_Surface *surface = NULL;
+            SDL_RWops *rw = NULL;
             bool colourKeyed = false;
 
         protected:
@@ -19,6 +20,7 @@ namespace Coronet
         public:
             Bitmap(const char *path);
             Bitmap(SDL_Surface *surface);
+            Bitmap(SDL_RWops *rw);
             ~Bitmap();
 
             Vector2 GetSize();

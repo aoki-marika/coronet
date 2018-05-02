@@ -1,9 +1,6 @@
 #include <sstream>
 
 #include "AssetStore.hpp"
-#include "AssetBitmap.hpp"
-#include "AssetBitmapSheet.hpp"
-#include "AssetTTFFont.hpp"
 #include "System.hpp"
 
 namespace Coronet
@@ -41,19 +38,16 @@ namespace Coronet
 
     std::shared_ptr<Bitmap> AssetStore::GetBitmap(std::string path)
     {
-        AssetBitmap bitmap = Get<AssetBitmap>("Images/" + path);
-        return bitmap.GetAsset();
+        return Get<Bitmap>("Images/" + path);
     }
 
     std::shared_ptr<BitmapSheet> AssetStore::GetBitmapSheet(std::string path, int tileWidth, int tileHeight)
     {
-        AssetBitmapSheet sheet = Get<AssetBitmapSheet>("Images/" + path, tileWidth, tileHeight);
-        return sheet.GetAsset();
+        return Get<BitmapSheet>("Images/" + path, tileWidth, tileHeight);
     }
 
     std::shared_ptr<TTFFont> AssetStore::GetTTF(std::string path, int ptsize)
     {
-        AssetTTFFont font = Get<AssetTTFFont>("Fonts/" + path, ptsize);
-        return font.GetAsset();
+        return Get<TTFFont>("Fonts/" + path, ptsize);
     }
 }

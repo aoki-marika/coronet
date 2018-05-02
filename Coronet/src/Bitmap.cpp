@@ -29,10 +29,18 @@ namespace Coronet
         size = { surface->w, surface->h };
     }
 
+    Bitmap::Bitmap(SDL_RWops *rw) : Bitmap(IMG_Load_RW(rw, 0))
+    {
+        this->rw = rw;
+    }
+
     Bitmap::~Bitmap()
     {
         if (surface != NULL)
             SDL_FreeSurface(surface);
+
+        if (rw != NULL)
+            SDL_RWclose(rw);
     }
 
     bool Bitmap::IsColourKeyed()
