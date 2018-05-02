@@ -1,7 +1,5 @@
 #include "TestBrowser.hpp"
 #include "TestBrowserItem.hpp"
-#include "Utilities.hpp"
-#include "Text.hpp"
 #include "Metrics.hpp"
 #include "AssetStore.hpp"
 
@@ -15,19 +13,17 @@ namespace Coronet
 
         items = std::make_shared<Container>();
         items->Position = { TestBrowserItem::HEIGHT, 0 };
-
         Add(items);
     }
 
     void TestBrowser::Load(DependencyManager &dependencies)
     {
-        Container::Load(dependencies);
-
-        auto assets = dependencies.Get<AssetStore>();
-
-        items->Add(arrow = std::make_shared<Sprite>(assets->GetBitmap("test-selection.png")));
+        Container::Load(dependencies);;
 
         maximumItems = int(dependencies.Get<Metrics>()->GetScreenSize().y / 12);
+        arrow = std::make_shared<Sprite>(dependencies.Get<AssetStore>()->GetBitmap("test-selection.png"));
+
+        items->Add(arrow);
         selectItem(selectedItem);
     }
 

@@ -1,5 +1,4 @@
 #include "TestGame.hpp"
-#include "AssetStore.hpp"
 
 namespace Coronet
 {
