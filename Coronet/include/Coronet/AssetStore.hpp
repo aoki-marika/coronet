@@ -5,14 +5,12 @@
 #include "Bitmap.hpp"
 #include "BitmapSheet.hpp"
 #include "TTFFont.hpp"
+#include "Utilities.hpp"
 
 namespace Coronet
 {
     class AssetStore
     {
-        private:
-            void throwPhysfsException(std::string message);
-
         public:
             AssetStore();
             ~AssetStore();
@@ -31,7 +29,7 @@ namespace Coronet
                 {
                     std::stringstream message;
                     message << "Failed to read file at '" << fullPath << "'";
-                    throwPhysfsException(message.str());
+                    ThrowPHYSFSException("openRead", message.str());
                 }
 
                 int length = PHYSFS_fileLength(file);
@@ -42,7 +40,7 @@ namespace Coronet
                 {
                     std::stringstream message;
                     message << "Failed to read file at '" << fullPath << "'";
-                    throwPhysfsException(message.str());
+                    ThrowPHYSFSException("readBytes", message.str());
                 }
 
                 PHYSFS_close(file);
