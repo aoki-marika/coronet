@@ -17,9 +17,6 @@ namespace Coronet
 
             void showTest(std::type_index testType);
 
-        protected:
-            virtual void Load(DependencyManager &dependencies) override;
-
         public:
             TestGame();
 
