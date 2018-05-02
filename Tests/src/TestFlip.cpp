@@ -10,7 +10,7 @@ namespace Tests
     {
         TestCase::Load(dependencies);
 
-        auto arrow = dependencies.Get<Coronet::AssetStore>()->GetBitmap("direction.png");
+        auto directions = dependencies.Get<Coronet::AssetStore>()->GetBitmap("directions.png");
 
         // end result should be (from left to right):
         //
@@ -19,10 +19,10 @@ namespace Tests
         // third sprite flipped horizontally
         // fourth sprite flipped horizontally
 
-        auto flipBoth = std::make_shared<Coronet::Sprite>(arrow);
-        auto nestedFlipNone = std::make_shared<Coronet::Sprite>(arrow);
-        auto nestedFlipBoth = std::make_shared<Coronet::Sprite>(arrow);
-        auto nestedTwiceFlipBoth = std::make_shared<Coronet::Sprite>(arrow);
+        auto flipBoth = std::make_shared<Coronet::Sprite>(directions);
+        auto nestedFlipNone = std::make_shared<Coronet::Sprite>(directions);
+        auto nestedFlipBoth = std::make_shared<Coronet::Sprite>(directions);
+        auto nestedTwiceFlipBoth = std::make_shared<Coronet::Sprite>(directions);
 
         auto flipVerticalContainer = std::make_shared<Coronet::Container>();
         auto nestedFlipNoneContainer = std::make_shared<Coronet::Container>();

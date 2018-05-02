@@ -1,4 +1,3 @@
-#include <Coronet/TTFFont.hpp>
 #include <Coronet/Metrics.hpp>
 #include <Coronet/AssetStore.hpp>
 
