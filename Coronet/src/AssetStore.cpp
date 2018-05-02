@@ -5,6 +5,8 @@
 
 namespace Coronet
 {
+    // todo: cache assets (at least fonts)
+
     AssetStore::AssetStore()
     {
         PHYSFS_init(System::GetExecutablePath());

@@ -2,19 +2,19 @@
 #include "Utilities.hpp"
 #include "Text.hpp"
 #include "Metrics.hpp"
+#include "AssetStore.hpp"
 
 namespace Coronet
 {
+    // todo: move into a base class so this logic can be shared
+    // todo: dont create the text here, but have an item class
+
     TestBrowser::TestBrowser()
     {
         Space = DrawablePositionSpace::Screen;
 
         items = std::make_shared<Container>();
-        font = std::make_shared<TTFFont>("HelvetiPixel.ttf", 15);
-        arrow = std::make_shared<Sprite>(std::make_shared<Bitmap>("test-selection.png"));
-
         items->Position = { ITEM_HEIGHT, 0 };
-        items->Add(arrow);
 
         Add(items);
     }
@@ -23,8 +23,33 @@ namespace Coronet
     {
         Container::Load(dependencies);
 
+        auto assets = dependencies.Get<AssetStore>();
+
+        font = assets->GetTTF("HelvetiPixel.ttf", 15);
+        arrow = std::make_shared<Sprite>(assets->GetBitmap("test-selection.png"));
+
+        items->Add(arrow);
+
         maximumItems = int(dependencies.Get<Metrics>()->GetScreenSize().y / 12);
         selectItem(selectedItem);
+    }
+
+    void TestBrowser::LoadComplete()
+    {
+        Container::LoadComplete();
+
+        // add all the items that were added before we were loaded
+        for (int i = 0; i < testTypes.size(); i++)
+            addItem(testTypes[i], i);
+    }
+
+    void TestBrowser::addItem(std::type_index testType, int index)
+    {
+        auto item = std::make_shared<Text>(font);
+        item->SetText(Demangle(testType.name()));
+        item->Position = { 0, ITEM_HEIGHT * index };
+
+        items->Add(item);
     }
 
     void TestBrowser::selectItem(int index)
@@ -49,13 +74,10 @@ namespace Coronet
 
     void TestBrowser::AddTest(std::type_index testType)
     {
-        auto item = std::make_shared<Text>(font);
-        item->SetText(Demangle(testType.name()));
-        item->Position = { 0, ITEM_HEIGHT * static_cast<int>(testTypes.size()) };
-
-        items->Add(item);
         testTypes.push_back(testType);
-        selectItem(selectedItem);
+
+        if (State != DrawableLoadState::Unloaded)
+            addItem(testType, static_cast<int>(testTypes.size()) - 1);
     }
 
     bool TestBrowser::OnKeyDown(SDL_Event event)

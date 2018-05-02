@@ -19,10 +19,12 @@ namespace Coronet
             std::shared_ptr<Sprite> arrow;
             std::vector<std::type_index> testTypes;
 
+            void addItem(std::type_index testType, int index);
             void selectItem(int index);
 
         protected:
             void Load(DependencyManager &dependencies) override;
+            void LoadComplete() override;
 
         public:
             std::function<void(std::type_index)> OnSelectTest;
