@@ -8,7 +8,6 @@
 namespace Coronet
 {
     // todo: move into a base class so this logic can be shared
-    // todo: dont create the text here, but have an item class
 
     TestBrowser::TestBrowser()
     {
@@ -26,9 +25,7 @@ namespace Coronet
 
         auto assets = dependencies.Get<AssetStore>();
 
-        arrow = std::make_shared<Sprite>(assets->GetBitmap("test-selection.png"));
-
-        items->Add(arrow);
+        items->Add(arrow = std::make_shared<Sprite>(assets->GetBitmap("test-selection.png")));
 
         maximumItems = int(dependencies.Get<Metrics>()->GetScreenSize().y / 12);
         selectItem(selectedItem);

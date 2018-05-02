@@ -1,8 +1,6 @@
 # Project specific
-bin/Tests
-bin/*.assets.zip
+bin/
 lib/
-coronet.log
 
 # macOS
 .DS_Store
