@@ -1,16 +1,20 @@
+#include <Coronet/AssetStore.hpp>
+
 #include "TestAnimation.hpp"
 
 namespace Tests
 {
-    void TestAnimation::LoadComplete()
+    void TestAnimation::Load(Coronet::DependencyManager &dependencies)
     {
-        TestCase::LoadComplete();
+        TestCase::Load(dependencies);
+
+        auto assets = dependencies.Get<Coronet::AssetStore>();
 
         animation = std::make_shared<Coronet::BitmapAnimation>();
 
-        animation->AddFrame(std::make_shared<Coronet::Bitmap>("red.png"), 1000);
-        animation->AddFrame(std::make_shared<Coronet::Bitmap>("blue.png"), 1500);
-        animation->AddFrame(std::make_shared<Coronet::Bitmap>("green.png"), 2000);
+        animation->AddFrame(assets->GetBitmap("red.png"), 1000);
+        animation->AddFrame(assets->GetBitmap("blue.png"), 1500);
+        animation->AddFrame(assets->GetBitmap("green.png"), 2000);
 
         animation->IsPlaying = true;
         animation->Repeat = true;

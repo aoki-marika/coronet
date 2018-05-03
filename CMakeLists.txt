@@ -21,6 +21,11 @@ include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${SDL2_IMAGE_INCLUDE_DIR})
 include_directories(${SDL2_TTF_INCLUDE_DIR})
 
+# Find and include PhysicsFS
+find_package(PhysFS REQUIRED)
+
+include_directories(${PHYSFS_INCLUDE_DIR})
+
 # Include sub-projects
 add_subdirectory(Coronet)
 add_subdirectory(Tests)

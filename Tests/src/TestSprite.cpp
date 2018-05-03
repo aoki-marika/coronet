@@ -1,15 +1,20 @@
 #include <Coronet/Sprite.hpp>
+#include <Coronet/AssetStore.hpp>
 
 #include "TestSprite.hpp"
 
 namespace Tests
 {
-    TestSprite::TestSprite()
+    void TestSprite::Load(Coronet::DependencyManager &dependencies)
     {
-        auto keyedBitmap = std::make_shared<Coronet::Bitmap>("test.png");
+        TestCase::Load(dependencies);
+
+        auto assets = dependencies.Get<Coronet::AssetStore>();
+
+        auto keyedBitmap = assets->GetBitmap("test.png");
         keyedBitmap->SetColourKey(255, 0, 0);
 
-        auto background = std::make_shared<Coronet::Sprite>(std::make_shared<Coronet::Bitmap>("test.png"));
+        auto background = std::make_shared<Coronet::Sprite>(assets->GetBitmap("test.png"));
         background->Position = { -16, -16 };
 
         Add(background);

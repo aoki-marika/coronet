@@ -1,29 +1,29 @@
 #include "TestBrowser.hpp"
-#include "Utilities.hpp"
-#include "Text.hpp"
+#include "TestBrowserItem.hpp"
 #include "Metrics.hpp"
+#include "AssetStore.hpp"
 
 namespace Coronet
 {
+    // todo: move into a base class so this logic can be shared
+
     TestBrowser::TestBrowser()
     {
         Space = DrawablePositionSpace::Screen;
 
         items = std::make_shared<Container>();
-        font = std::make_shared<TTFFont>("HelvetiPixel.ttf", 15);
-        arrow = std::make_shared<Sprite>(std::make_shared<Bitmap>("test-selection.png"));
-
-        items->Position = { ITEM_HEIGHT, 0 };
-        items->Add(arrow);
-
+        items->Position = { TestBrowserItem::HEIGHT, 0 };
         Add(items);
     }
 
     void TestBrowser::Load(DependencyManager &dependencies)
     {
-        Container::Load(dependencies);
+        Container::Load(dependencies);;
 
         maximumItems = int(dependencies.Get<Metrics>()->GetScreenSize().y / 12);
+        arrow = std::make_shared<Sprite>(dependencies.Get<AssetStore>()->GetBitmap("test-selection.png"));
+
+        items->Add(arrow);
         selectItem(selectedItem);
     }
 
@@ -32,7 +32,7 @@ namespace Coronet
         if (testTypes.size() > 0)
         {
             arrow->Visibility = Visibility::Visible;
-            arrow->Position = { -ITEM_HEIGHT, ITEM_HEIGHT * index };
+            arrow->Position = { -TestBrowserItem::HEIGHT, TestBrowserItem::HEIGHT * index };
 
             int upperVisible = firstVisibleItem + std::max(0, maximumItems - 1);
 
@@ -41,7 +41,7 @@ namespace Coronet
             else if (index < firstVisibleItem)
                 firstVisibleItem = index;
 
-            items->Position.y = -(ITEM_HEIGHT * firstVisibleItem);
+            items->Position.y = -(TestBrowserItem::HEIGHT * firstVisibleItem);
         }
         else
             arrow->Visibility = Visibility::Hidden;
@@ -49,13 +49,11 @@ namespace Coronet
 
     void TestBrowser::AddTest(std::type_index testType)
     {
-        auto item = std::make_shared<Text>(font);
-        item->SetText(Demangle(testType.name()));
-        item->Position = { 0, ITEM_HEIGHT * static_cast<int>(testTypes.size()) };
-
+        auto item = std::make_shared<TestBrowserItem>(testType);
+        item->Position = { 0, TestBrowserItem::HEIGHT * static_cast<int>(testTypes.size()) };
         items->Add(item);
+
         testTypes.push_back(testType);
-        selectItem(selectedItem);
     }
 
     bool TestBrowser::OnKeyDown(SDL_Event event)

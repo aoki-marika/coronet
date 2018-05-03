@@ -1,8 +1,8 @@
-#include <Coronet/TestCase.hpp>
+#include <Coronet/TestGame.hpp>
 
 namespace Tests
 {
-    class TestText : public Coronet::TestCase
+    class CoronetTestGame : public Coronet::TestGame
     {
         protected:
             void Load(Coronet::DependencyManager &dependencies) override;

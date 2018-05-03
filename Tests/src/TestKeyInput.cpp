@@ -1,3 +1,5 @@
+#include <Coronet/AssetStore.hpp>
+
 #include "TestKeyInput.hpp"
 
 namespace Tests
@@ -30,11 +32,17 @@ namespace Tests
 
     TestKeyContainer::TestKeyContainer(const char *bitmapPath, SDL_Keycode key, bool stealDown, bool stealUp)
     {
+        this->bitmapPath = bitmapPath;
         this->key = key;
         this->stealDown = stealDown;
         this->stealUp = stealUp;
+    }
 
-        sprite = std::make_shared<Coronet::Sprite>(std::make_shared<Coronet::Bitmap>(bitmapPath));
+    void TestKeyContainer::Load(Coronet::DependencyManager &dependencies)
+    {
+        Container::Load(dependencies);
+
+        sprite = std::make_shared<Coronet::Sprite>(dependencies.Get<Coronet::AssetStore>()->GetBitmap(bitmapPath));
         sprite->Visibility = Coronet::Visibility::Hidden;
 
         Add(sprite);

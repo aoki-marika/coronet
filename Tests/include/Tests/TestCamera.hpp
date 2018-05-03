@@ -18,7 +18,6 @@ namespace Tests
             void LoadComplete() override;
 
         public:
-            TestCamera();
             ~TestCamera();
             void Update() override;
     };

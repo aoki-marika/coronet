@@ -1,6 +1,6 @@
 #include <Coronet/GameHost.hpp>
-#include <Coronet/TestGame.hpp>
 
+#include "CoronetTestGame.hpp"
 #include "TestSprite.hpp"
 #include "TestContainer.hpp"
 #include "TestCamera.hpp"
@@ -16,7 +16,7 @@ using namespace Tests;
 int main(int argc, char *argv[])
 {
     auto host = std::make_shared<Coronet::GameHost>("Tests", std::make_shared<Coronet::Metrics>(8, 8, 2, 2, 20, 18));
-    auto game = std::make_shared<Coronet::TestGame>();
+    auto game = std::make_shared<CoronetTestGame>();
 
     game->RegisterTest<TestSprite>();
     game->RegisterTest<TestContainer>();

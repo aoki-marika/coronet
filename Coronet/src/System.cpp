@@ -43,4 +43,13 @@ namespace Coronet
             return "/";
         #endif
     }
+
+    const char *System::PathRelativeToExecutable(const char *path)
+    {
+        char *newPath = GetExecutableDirectory();
+        strcat(newPath, GetPathSeparator());
+        strcat(newPath, path);
+
+        return newPath;
+    }
 }

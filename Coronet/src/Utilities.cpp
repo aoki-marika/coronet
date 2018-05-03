@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <cxxabi.h>
+#include <physfs.h>
 
 #include "Utilities.hpp"
 
@@ -39,6 +40,17 @@ namespace Coronet
         details << "TTF_" << method << " Error: " << message << ", " << TTF_GetError();
 
         QuitSDL();
+        throw std::logic_error(details.str());
+    }
+
+    void ThrowPHYSFSException(std::string method, std::string message)
+    {
+        PHYSFS_ErrorCode code = PHYSFS_getLastErrorCode();
+        std::stringstream details;
+        details << "PHYSFS_" << method << " Error: " << message << ", " << PHYSFS_getErrorByCode(code) << " (" << code << ").";
+
+        QuitSDL();
+        PHYSFS_deinit();
         throw std::logic_error(details.str());
     }
 

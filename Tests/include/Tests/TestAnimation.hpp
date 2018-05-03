@@ -9,7 +9,7 @@ namespace Tests
             std::shared_ptr<Coronet::BitmapAnimation> animation;
 
         protected:
-            void LoadComplete() override;
+            void Load(Coronet::DependencyManager &dependencies) override;
 
         public:
             bool OnKeyDown(SDL_Event event) override;

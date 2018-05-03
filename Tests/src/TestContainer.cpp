@@ -1,6 +1,7 @@
 #include <Coronet/Sprite.hpp>
 #include <Coronet/Container.hpp>
 #include <Coronet/Metrics.hpp>
+#include <Coronet/AssetStore.hpp>
 
 #include "TestContainer.hpp"
 
@@ -10,9 +11,11 @@ namespace Tests
     {
         TestCase::Load(dependencies);
 
-        auto red = std::make_shared<Coronet::Bitmap>("red.png");
-        auto blue = std::make_shared<Coronet::Bitmap>("blue.png");
-        auto green = std::make_shared<Coronet::Bitmap>("green.png");
+        auto assets = dependencies.Get<Coronet::AssetStore>();
+
+        auto red = assets->GetBitmap("red.png");
+        auto blue = assets->GetBitmap("blue.png");
+        auto green = assets->GetBitmap("green.png");
 
         auto containerOne = std::make_shared<Coronet::Container>();
         auto containerTwo = std::make_shared<Coronet::Container>();

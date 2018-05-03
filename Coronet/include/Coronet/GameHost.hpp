@@ -7,6 +7,7 @@
 #include "Metrics.hpp"
 #include "GameClock.hpp"
 #include "Camera.hpp"
+#include "AssetStore.hpp"
 
 namespace Coronet
 {
@@ -21,6 +22,7 @@ namespace Coronet
             std::shared_ptr<Renderer> renderer;
             std::shared_ptr<Camera> camera;
             std::shared_ptr<GameClock> clock;
+            std::shared_ptr<AssetStore> assets;
             std::shared_ptr<Game> hostedGame;
 
         public:

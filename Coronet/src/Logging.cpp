@@ -11,11 +11,7 @@ namespace Coronet
 {
     Logger::Logger(const char *filename)
     {
-        char *path = System::GetExecutableDirectory();
-        strcat(path, System::GetPathSeparator());
-        strcat(path, filename);
-
-        logFile.open(path, std::fstream::out | std::ofstream::trunc);
+        logFile.open(System::PathRelativeToExecutable(filename), std::fstream::out | std::ofstream::trunc);
     }
 
     Logger::~Logger()

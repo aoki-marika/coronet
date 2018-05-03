@@ -18,9 +18,22 @@ namespace Coronet
         }
     }
 
+    TTFFont::TTFFont(TTF_Font *font)
+    {
+        this->font = font;
+    }
+
+    TTFFont::TTFFont(SDL_RWops *rw, int ptsize) : TTFFont(TTF_OpenFontRW(rw, 0, ptsize))
+    {
+        this->rw = rw;
+    }
+
     TTFFont::~TTFFont()
     {
         TTF_CloseFont(font);
+
+        if (rw != nullptr)
+            SDL_RWclose(rw);
     }
 
     std::shared_ptr<Bitmap> TTFFont::GetTextBitmap(std::string text, SDL_Color textColour)

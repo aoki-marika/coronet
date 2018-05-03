@@ -1,4 +1,5 @@
 #include <sstream>
+#include <SDL2/SDL_image.h>
 
 #include "BitmapSheet.hpp"
 
@@ -9,10 +10,23 @@ namespace Coronet
         tileSize = { tileWidth, tileHeight };
     }
 
+    BitmapSheet::BitmapSheet(SDL_Surface *surface, int tileWidth, int tileHeight) : Bitmap(surface)
+    {
+        tileSize = { tileWidth, tileHeight };
+    }
+
+    BitmapSheet::BitmapSheet(SDL_RWops *rw, int tileWidth, int tileHeight) : BitmapSheet(IMG_Load_RW(rw, 0), tileWidth, tileHeight)
+    {
+        this->rw = rw;
+    }
+
     BitmapSheet::~BitmapSheet()
     {
         if (texture != nullptr)
             SDL_DestroyTexture(texture);
+
+        if (rw != nullptr)
+            SDL_RWclose(rw);
     }
 
     Vector2 BitmapSheet::GetTileSize()
