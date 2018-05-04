@@ -15,16 +15,11 @@ namespace Tests
         auto fontOne = assets->GetTTF("HelvetiPixel.ttf", 15);
         auto fontTwo = assets->GetTTF("HelvetiPixel.ttf", 48);
 
-        auto textOne = std::make_shared<Coronet::Text>(fontOne);
+        auto textOne = std::make_shared<Coronet::Text>(fontOne, "Hello, Coronet world!");
         auto textTwo = std::make_shared<Coronet::Text>(fontTwo);
-        auto textThree = std::make_shared<Coronet::Text>(fontTwo);
-
-        textOne->SetText("Hello, Coronet world!");
-        textThree->SetText("T X E T");
+        auto textThree = std::make_shared<Coronet::Text>(fontTwo, "T X E T", SDL_Colour { 255, 0, 255 });
 
         textTwo->SetColour({ 255, 255, 0 });
-        textThree->SetColour({ 255, 0, 255 });
-
         textTwo->SetText("T E X T");
 
         textTwo->Position = { 0, 15 };

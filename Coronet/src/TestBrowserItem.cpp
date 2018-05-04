@@ -13,9 +13,7 @@ namespace Coronet
     {
         Container::Load(dependencies);
 
-        auto text = std::make_shared<Text>(dependencies.Get<AssetStore>()->GetTTF("HelvetiPixel.ttf", 15));
-        text->SetText(Demangle(type.name()));
-
-        Add(text);
+        auto font = dependencies.Get<AssetStore>()->GetTTF("HelvetiPixel.ttf", 15);
+        Add(std::make_shared<Text>(font, Demangle(type.name())));
     }
 }
