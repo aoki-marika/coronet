@@ -81,7 +81,6 @@ namespace Coronet
 
             virtual bool IsVisible();
 
-            // todo: dont like callComplete
             virtual void Inject(DependencyManager &dependencies, bool callComplete = true);
             virtual bool TriggerKeyDown(SDL_Event event);
             virtual bool TriggerKeyUp(SDL_Event event);

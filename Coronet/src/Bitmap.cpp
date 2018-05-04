@@ -10,7 +10,7 @@ namespace Coronet
     {
         SDL_Surface *image = IMG_Load(path);
 
-        if (image == NULL)
+        if (image == nullptr)
         {
             std::stringstream message;
             message << "Failed to load image at '" << path << "'";
@@ -36,10 +36,9 @@ namespace Coronet
 
     Bitmap::~Bitmap()
     {
-        if (surface != NULL)
-            SDL_FreeSurface(surface);
+        SDL_FreeSurface(surface);
 
-        if (rw != NULL)
+        if (rw != nullptr)
             SDL_RWclose(rw);
     }
 

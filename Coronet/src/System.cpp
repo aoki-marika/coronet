@@ -15,10 +15,7 @@ namespace Coronet
             uint32_t size = sizeof(executablePath);
             _NSGetExecutablePath(executablePath, &size);
 
-            char *realPath;
-            realPath = realpath(executablePath, NULL);
-
-            return realPath;
+            return realpath(executablePath, NULL);
         #else
             // todo: these are temporary until support for linux/windows is added
             throw std::system_error("Unsupported OS.");

@@ -6,7 +6,7 @@ namespace Coronet
     Renderer::Renderer(const std::shared_ptr<Window> &window)
     {
         renderer = SDL_CreateRenderer(window->GetWindow(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-        if (renderer == NULL)
+        if (renderer == nullptr)
             ThrowSDLException("CreateRenderer");
     }
 
