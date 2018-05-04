@@ -1,3 +1,5 @@
+#pragma once
+
 namespace Coronet
 {
     template<class T> class Frame
