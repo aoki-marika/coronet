@@ -10,6 +10,8 @@ namespace Coronet
 {
     template<class T> class Animation : public Container
     {
+        // todo: add ctor with frames
+
         private:
             std::shared_ptr<GameClock> clock;
             std::vector<Frame<T>> frames;
@@ -48,6 +50,7 @@ namespace Coronet
 
             void AddFrames(std::vector<T> frames)
             {
+                // todo: fix this??
                 for (auto &f : frames)
                     this->frames.push_back(f);
             }
@@ -64,6 +67,11 @@ namespace Coronet
                 currentFrameIndex = i;
                 currentFrameTicks = 0;
                 displayFrame(currentFrameIndex);
+            }
+
+            void GoToLastFrame()
+            {
+                GoToFrame(frames.size() - 1);
             }
 
             void PlayOnce()
