@@ -10,8 +10,8 @@ namespace Coronet
     {
         private:
             Vector2 size;
-            SDL_Surface *surface = NULL;
-            SDL_RWops *rw = NULL;
+            SDL_Surface *surface;
+            SDL_RWops *rw = nullptr;
             bool colourKeyed = false;
 
         protected:

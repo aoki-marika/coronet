@@ -10,7 +10,7 @@ namespace Coronet
     {
         font = TTF_OpenFont(path, ptsize);
 
-        if (font == NULL)
+        if (font == nullptr)
         {
             std::stringstream message;
             message << "Failed to load font at '" << path << "'";

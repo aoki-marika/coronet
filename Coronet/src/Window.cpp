@@ -12,7 +12,7 @@ namespace Coronet
             ThrowSDLException("Init");
 
         window = SDL_CreateWindow(title, x, y, width, height, SDL_WINDOW_SHOWN);
-        if (window == NULL)
+        if (window == nullptr)
             ThrowSDLException("CreateWindow");
 
         if (TTF_Init() != 0)
