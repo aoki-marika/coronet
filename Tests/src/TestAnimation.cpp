@@ -1,5 +1,5 @@
 #include <Coronet/AssetStore.hpp>
-#include <Coronet/SheetAnimation.hpp>
+#include <Coronet/BitmapSheetAnimation.hpp>
 
 #include "TestAnimation.hpp"
 
@@ -13,7 +13,7 @@ namespace Tests
 
         bitmapAnimation = std::make_shared<Coronet::BitmapAnimation>();
         auto sheet = assets->GetBitmapSheet("tiles.png", 8, 8);
-        auto sheetAnimation = std::make_shared<Coronet::SheetAnimation>(sheet);
+        auto sheetAnimation = std::make_shared<Coronet::BitmapSheetAnimation>(sheet);
 
         sheet->SetColourKey(255, 0, 255);
 

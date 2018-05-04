@@ -1,8 +1,8 @@
-#include "SheetAnimation.hpp"
+#include "BitmapSheetAnimation.hpp"
 
 namespace Coronet
 {
-    SheetAnimation::SheetAnimation(const std::shared_ptr<BitmapSheet> &sheet)
+    BitmapSheetAnimation::BitmapSheetAnimation(const std::shared_ptr<BitmapSheet> &sheet)
     {
         this->sheet = sheet;
 
@@ -10,7 +10,7 @@ namespace Coronet
         Add(sprite);
     }
 
-    void SheetAnimation::DisplayFrame(const Tile &frame)
+    void BitmapSheetAnimation::DisplayFrame(const Tile &frame)
     {
         sprite->SetBitmap(sheet->GetTile(frame));
     }

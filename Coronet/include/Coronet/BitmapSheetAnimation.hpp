@@ -7,7 +7,7 @@
 
 namespace Coronet
 {
-    class SheetAnimation : public Animation<Tile>
+    class BitmapSheetAnimation : public Animation<Tile>
     {
         private:
             std::shared_ptr<BitmapSheet> sheet;
@@ -17,6 +17,6 @@ namespace Coronet
             void DisplayFrame(const Tile &frame);
 
         public:
-            SheetAnimation(const std::shared_ptr<BitmapSheet> &sheet);
+            BitmapSheetAnimation(const std::shared_ptr<BitmapSheet> &sheet);
     };
 }
