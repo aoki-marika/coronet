@@ -66,6 +66,14 @@ namespace Coronet
                 displayFrame(currentFrameIndex);
             }
 
+            void PlayOnce()
+            {
+                Repeat = false;
+                IsPlaying = true;
+
+                GoToFrame(0);
+            }
+
             virtual void Update() override
             {
                 Container::Update();
