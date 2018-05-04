@@ -1,4 +1,5 @@
 #include <Coronet/AssetStore.hpp>
+#include <Coronet/BitmapSheetAnimation.hpp>
 
 #include "TestAnimation.hpp"
 
@@ -10,22 +11,37 @@ namespace Tests
 
         auto assets = dependencies.Get<Coronet::AssetStore>();
 
-        animation = std::make_shared<Coronet::BitmapAnimation>();
+        bitmapAnimation = std::make_shared<Coronet::BitmapAnimation>();
+        auto sheet = assets->GetBitmapSheet("tiles.png", 8, 8);
+        auto sheetAnimation = std::make_shared<Coronet::BitmapSheetAnimation>(sheet);
 
-        animation->AddFrame(assets->GetBitmap("red.png"), 1000);
-        animation->AddFrame(assets->GetBitmap("blue.png"), 1500);
-        animation->AddFrame(assets->GetBitmap("green.png"), 2000);
+        sheet->SetColourKey(255, 0, 255);
 
-        animation->IsPlaying = true;
-        animation->Repeat = true;
-        Add(animation);
+        bitmapAnimation->AddFrame(assets->GetBitmap("red.png"), 1000);
+        bitmapAnimation->AddFrame(assets->GetBitmap("blue.png"), 1500);
+        bitmapAnimation->AddFrame(assets->GetBitmap("green.png"), 2000);
+
+        sheetAnimation->AddFrame({ 0, 0 }, 500);
+        sheetAnimation->AddFrame({ 0, 1 }, 500);
+        sheetAnimation->AddFrame({ 1, 0 }, 500);
+        sheetAnimation->AddFrame({ 1, 1 }, 500);
+
+        bitmapAnimation->IsPlaying = true;
+        bitmapAnimation->Repeat = true;
+
+        sheetAnimation->Position = { 64, 0 };
+        sheetAnimation->IsPlaying = true;
+        sheetAnimation->Repeat = true;
+
+        Add(bitmapAnimation);
+        Add(sheetAnimation);
     }
 
     bool TestAnimation::OnKeyDown(SDL_Event event)
     {
         if (event.key.keysym.sym == SDLK_1)
         {
-            animation->GoToFrame(1);
+            bitmapAnimation->GoToFrame(1);
             return true;
         }
 

@@ -42,6 +42,11 @@ namespace Coronet
             SDL_RWclose(rw);
     }
 
+    SDL_Surface *Bitmap::GetSurface()
+    {
+        return surface;
+    }
+
     bool Bitmap::IsColourKeyed()
     {
         return colourKeyed;

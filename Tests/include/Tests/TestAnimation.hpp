@@ -6,7 +6,7 @@ namespace Tests
     class TestAnimation : public Coronet::TestCase
     {
         private:
-            std::shared_ptr<Coronet::BitmapAnimation> animation;
+            std::shared_ptr<Coronet::BitmapAnimation> bitmapAnimation;
 
         protected:
             void Load(Coronet::DependencyManager &dependencies) override;
