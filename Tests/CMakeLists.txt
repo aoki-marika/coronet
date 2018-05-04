@@ -2,6 +2,9 @@
 cmake_minimum_required(VERSION 2.6)
 project(Tests)
 
+# C++ 17
+set(CMAKE_CXX_STANDARD 17)
+
 # Include source files
 file(GLOB Tests_src "src/*.cpp" "include/Tests/*.hpp")
 include_directories(include include/Tests src)
