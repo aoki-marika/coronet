@@ -14,6 +14,7 @@ namespace Coronet
             std::shared_ptr<GameClock> clock;
             std::vector<Frame<T>> frames;
             int currentFrameIndex = 0;
+            int lastFrameIndex = -1;
             double currentFrameTicks = 0;
 
             void displayFrame(int index)
@@ -92,7 +93,11 @@ namespace Coronet
                         }
                     }
 
-                    displayFrame(currentFrameIndex);
+                    if (lastFrameIndex != currentFrameIndex)
+                    {
+                        lastFrameIndex = currentFrameIndex;
+                        displayFrame(currentFrameIndex);
+                    }
                 }
             }
     };
