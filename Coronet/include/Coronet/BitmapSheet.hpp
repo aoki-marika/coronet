@@ -19,6 +19,7 @@ namespace Coronet
             ~BitmapSheet();
 
             Vector2 GetTileSize();
+            Vector2 GetTileCount();
             std::shared_ptr<Bitmap> GetTile(Tile tile);
     };
 }

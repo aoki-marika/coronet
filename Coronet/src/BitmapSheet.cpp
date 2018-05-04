@@ -33,6 +33,11 @@ namespace Coronet
         return tileSize;
     }
 
+    Vector2 BitmapSheet::GetTileCount()
+    {
+        return tileCount;
+    }
+
     std::shared_ptr<Bitmap> BitmapSheet::GetTile(Tile tile)
     {
         if (tile.GetSheetPosition().x >= tileCount.x || tile.GetSheetPosition().y >= tileCount.y)
