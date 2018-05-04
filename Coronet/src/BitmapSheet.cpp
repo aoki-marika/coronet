@@ -52,6 +52,9 @@ namespace Coronet
                                                     format->Bmask,
                                                     format->Amask);
 
+        if (format->palette != nullptr)
+            SDL_SetSurfacePalette(surface, format->palette);
+
         SDL_Rect sourceRect = {
             tileSize.x * tile.GetSheetPosition().x,
             tileSize.y * tile.GetSheetPosition().y,
