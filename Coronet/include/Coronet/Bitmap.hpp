@@ -15,6 +15,7 @@ namespace Coronet
             bool colourKeyed = false;
 
         protected:
+            SDL_Surface *GetSurface();
             bool IsColourKeyed();
 
         public:

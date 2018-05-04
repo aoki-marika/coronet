@@ -8,11 +8,13 @@ namespace Coronet
     BitmapSheet::BitmapSheet(const char *path, int tileWidth, int tileHeight) : Bitmap(path)
     {
         tileSize = { tileWidth, tileHeight };
+        tileCount = { GetSurface()->w / tileWidth, GetSurface()->h / tileHeight };
     }
 
     BitmapSheet::BitmapSheet(SDL_Surface *surface, int tileWidth, int tileHeight) : Bitmap(surface)
     {
         tileSize = { tileWidth, tileHeight };
+        tileCount = { surface->w / tileWidth, surface->h / tileHeight };
     }
 
     BitmapSheet::BitmapSheet(SDL_RWops *rw, int tileWidth, int tileHeight) : BitmapSheet(IMG_Load_RW(rw, 0), tileWidth, tileHeight)
@@ -22,9 +24,6 @@ namespace Coronet
 
     BitmapSheet::~BitmapSheet()
     {
-        if (texture != nullptr)
-            SDL_DestroyTexture(texture);
-
         if (rw != nullptr)
             SDL_RWclose(rw);
     }
@@ -34,18 +33,8 @@ namespace Coronet
         return tileSize;
     }
 
-    SDL_Texture *BitmapSheet::ToTexture(SDL_Renderer *renderer, Tile tile)
+    std::shared_ptr<Bitmap> BitmapSheet::GetTile(Tile tile)
     {
-        // SDL_CreateTextureFromSurface is expensive, so only call it once and cache the result
-        if (texture == nullptr)
-        {
-            texture = Bitmap::ToTexture(renderer);
-
-            int w, h;
-            SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-            tileCount = { w / tileSize.x, h / tileSize.y };
-        }
-
         if (tile.GetSheetPosition().x >= tileCount.x || tile.GetSheetPosition().y >= tileCount.y)
         {
             std::stringstream message;
@@ -53,11 +42,15 @@ namespace Coronet
             throw std::invalid_argument(message.str());
         }
 
-        SDL_Texture *tileTexture = SDL_CreateTexture(renderer,
-                                                     SDL_PIXELFORMAT_RGBA8888,
-                                                     SDL_TEXTUREACCESS_TARGET,
-                                                     tileSize.x,
-                                                     tileSize.y);
+        SDL_PixelFormat *format = GetSurface()->format;
+        SDL_Surface *surface = SDL_CreateRGBSurface(0,
+                                                    tileSize.x,
+                                                    tileSize.y,
+                                                    format->BitsPerPixel,
+                                                    format->Rmask,
+                                                    format->Gmask,
+                                                    format->Bmask,
+                                                    format->Amask);
 
         SDL_Rect sourceRect = {
             tileSize.x * tile.GetSheetPosition().x,
@@ -66,17 +59,7 @@ namespace Coronet
             tileSize.y
         };
 
-        SDL_SetRenderTarget(renderer, tileTexture);
-
-        if (IsColourKeyed())
-        {
-            SDL_RenderClear(renderer);
-            SDL_SetTextureBlendMode(tileTexture, SDL_BLENDMODE_BLEND);
-        }
-
-        SDL_RenderCopy(renderer, texture, &sourceRect, NULL);
-        SDL_SetRenderTarget(renderer, NULL);
-
-        return tileTexture;
+        SDL_BlitSurface(GetSurface(), &sourceRect, surface, NULL);
+        return std::make_shared<Bitmap>(surface);
     }
 }

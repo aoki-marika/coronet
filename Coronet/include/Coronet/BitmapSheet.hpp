@@ -10,7 +10,6 @@ namespace Coronet
         private:
             Vector2 tileSize;
             Vector2 tileCount;
-            SDL_Texture *texture = nullptr;
             SDL_RWops *rw = nullptr;
 
         public:
@@ -20,6 +19,6 @@ namespace Coronet
             ~BitmapSheet();
 
             Vector2 GetTileSize();
-            SDL_Texture *ToTexture(SDL_Renderer *renderer, Tile tile);
+            std::shared_ptr<Bitmap> GetTile(Tile tile);
     };
 }

@@ -71,7 +71,7 @@ namespace Coronet
             tileSize.y
         };
 
-        SDL_Texture *texture = sheet->ToTexture(renderer, tile);
+        SDL_Texture *texture = sheet->GetTile(tile)->ToTexture(renderer);
 
         SDL_SetRenderTarget(renderer, tilesTexture);
         SDL_RenderCopy(renderer, texture, NULL, &destRect);
