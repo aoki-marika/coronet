@@ -159,6 +159,22 @@ namespace Coronet
         AddTransform(Transform(startValue, endValue, t + delay, t + delay + duration, easing, callback, onFinished));
     }
 
+    void Drawable::MoveToX(double x, double duration, Easing easing, std::function<void()> onFinished)
+    {
+        AddRelativeTransform(Position.x, x, 0, duration, easing, [this] (double value)
+        {
+            this->Position.x = value;
+        }, onFinished);
+    }
+
+    void Drawable::MoveToY(double y, double duration, Easing easing, std::function<void()> onFinished)
+    {
+        AddRelativeTransform(Position.y, y, 0, duration, easing, [this] (double value)
+        {
+            this->Position.y = value;
+        }, onFinished);
+    }
+
     void Drawable::Update()
     {
         UpdateTransforms(clock);
