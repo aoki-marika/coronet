@@ -16,7 +16,7 @@ namespace Coronet
 
         protected:
             SDL_Surface *GetSurface();
-            SDL_Color GetColourKey();
+            Uint32 GetColourKey();
 
         public:
             Bitmap(const char *path);
@@ -26,7 +26,8 @@ namespace Coronet
 
             Vector2 GetSize();
             bool IsColourKeyed();
-            void SetColourKey(Uint8 r, Uint8 g, Uint8 b);
+            void SetColourKey(SDL_Colour colour);
+            void SetColourKey(Uint32 colour);
             SDL_Texture *ToTexture(SDL_Renderer *renderer);
     };
 }

@@ -12,7 +12,7 @@ namespace Tests
         auto assets = dependencies.Get<Coronet::AssetStore>();
 
         auto keyedBitmap = assets->GetBitmap("test.png");
-        keyedBitmap->SetColourKey(255, 0, 0);
+        keyedBitmap->SetColourKey({ 255, 0, 0 });
 
         auto background = std::make_shared<Coronet::Sprite>(assets->GetBitmap("test.png"));
         background->Position = { -16, -16 };
