@@ -36,6 +36,9 @@ namespace Coronet
         SDL_SetRenderTarget(renderer, tilesTexture);
         SDL_RenderClear(renderer);
         SDL_SetRenderTarget(renderer, NULL);
+
+        if (sheet->IsColourKeyed())
+            SDL_SetTextureBlendMode(tilesTexture, SDL_BLENDMODE_BLEND);
     }
 
     SDL_Texture *TiledTexture::GetDrawTexture()

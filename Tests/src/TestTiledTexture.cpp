@@ -1,4 +1,5 @@
 #include <Coronet/AssetStore.hpp>
+#include <Coronet/Sprite.hpp>
 
 #include "TestTiledTexture.hpp"
 
@@ -8,11 +9,20 @@ namespace Tests
     {
         TestCase::Load(dependencies);
 
-        auto sheet = dependencies.Get<Coronet::AssetStore>()->GetBitmapSheet("tiles.png", 8, 8);
+        auto assets = dependencies.Get<Coronet::AssetStore>();
+        auto bitmap = assets->GetBitmap("test.png");
+        auto background = std::make_shared<Coronet::Sprite>(bitmap);
+        auto sheet = assets->GetBitmapSheet("tiles.png", 8, 8);
         sheet->SetColourKey(255, 0, 255);
 
         tiled = std::make_shared<Coronet::TiledTexture>(sheet, 10, 10);
+        tiled->Position = { 0, 16 };
 
+        auto sprite = std::make_shared<Coronet::Sprite>(sheet->GetTile({ 0, 0 }));
+        sprite->Position = { 16, 0 };
+
+        Add(background);
+        Add(sprite);
         Add(tiled);
     }
 
