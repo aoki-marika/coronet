@@ -13,7 +13,7 @@ namespace Tests
         auto bitmap = assets->GetBitmap("test.png");
         auto background = std::make_shared<Coronet::Sprite>(bitmap);
         auto sheet = assets->GetBitmapSheet("tiles.png", 8, 8);
-        sheet->SetColourKey(255, 0, 255);
+        sheet->SetColourKey({ 255, 0, 255 });
 
         tiled = std::make_shared<Coronet::TiledTexture>(sheet, 10, 10);
         tiled->Position = { 0, 16 };

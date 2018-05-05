@@ -15,7 +15,7 @@ namespace Tests
         auto sheet = assets->GetBitmapSheet("tiles.png", 8, 8);
         auto sheetAnimation = std::make_shared<Coronet::BitmapSheetAnimation>(sheet);
 
-        sheet->SetColourKey(255, 0, 255);
+        sheet->SetColourKey({ 255, 0, 255 });
 
         bitmapAnimation->AddFrame(assets->GetBitmap("red.png"), 1000);
         bitmapAnimation->AddFrame(assets->GetBitmap("blue.png"), 1500);

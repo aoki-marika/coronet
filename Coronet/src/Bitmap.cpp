@@ -47,15 +47,12 @@ namespace Coronet
         return surface;
     }
 
-    SDL_Color Bitmap::GetColourKey()
+    Uint32 Bitmap::GetColourKey()
     {
         Uint32 key;
         SDL_GetColorKey(surface, &key);
 
-        Uint8 r, g, b;
-        SDL_GetRGB(key, GetSurface()->format, &r, &g, &b);
-
-        return { r, g, b };
+        return key;
     }
 
     Vector2 Bitmap::GetSize()
@@ -68,10 +65,14 @@ namespace Coronet
         return colourKeyed;
     }
 
-    // todo: take an SDL_Colour instead of individual channels
-    void Bitmap::SetColourKey(Uint8 r, Uint8 g, Uint8 b)
+    void Bitmap::SetColourKey(SDL_Color colour)
     {
-        SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, r, g, b));
+        SetColourKey(SDL_MapRGB(surface->format, colour.r, colour.g, colour.b));
+    }
+
+    void Bitmap::SetColourKey(Uint32 colour)
+    {
+        SDL_SetColorKey(surface, SDL_TRUE, colour);
         colourKeyed = true;
     }
 
