@@ -29,7 +29,7 @@ namespace Tests
         bitmapAnimation->IsPlaying = true;
         bitmapAnimation->Repeat = true;
 
-        sheetAnimation->Position = { 64, 0 };
+        sheetAnimation->Position = { 28, 0 };
         sheetAnimation->IsPlaying = true;
         sheetAnimation->Repeat = true;
 

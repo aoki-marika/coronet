@@ -38,6 +38,15 @@ namespace Coronet
             bool IsPlaying = false;
             bool Repeat = false;
 
+            Animation()
+            {
+            }
+
+            Animation(std::vector<Frame<T>> frames)
+            {
+                AddFrames(frames);
+            }
+
             void AddFrame(Frame<T> frame)
             {
                 frames.push_back(frame);
@@ -48,11 +57,25 @@ namespace Coronet
                 AddFrame(Frame<T>(content, duration));
             }
 
-            void AddFrames(std::vector<T> frames)
+            void AddFrames(std::vector<Frame<T>> frames)
             {
-                // todo: fix this??
                 for (auto &f : frames)
-                    this->frames.push_back(f);
+                    AddFrame(f);
+            }
+
+            void InsertFrame(int index, Frame<T> frame)
+            {
+                frames.insert(index, frame);
+            }
+
+            void InsertFrame(int index, T content, double duration)
+            {
+                InsertFrame(index, Frame<T>(content, duration));
+            }
+
+            void InsertFrames(int index, std::vector<Frame<T>> frames)
+            {
+                frames.insert(index, frames.begin(), frames.end());
             }
 
             void GoToFrame(int frameIndex)
