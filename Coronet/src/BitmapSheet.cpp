@@ -67,7 +67,19 @@ namespace Coronet
             tileSize.y
         };
 
+        auto key = GetColourKey();
+        bool colourKeyed = IsColourKeyed();
+
+        // fill the background with the keyed colour so the background of the bitmap is blank
+        if (colourKeyed)
+            SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, key.r, key.g, key.b));
+
         SDL_BlitSurface(GetSurface(), &sourceRect, surface, NULL);
-        return std::make_shared<Bitmap>(surface);
+        auto bitmap = std::make_shared<Bitmap>(surface);
+
+        if (colourKeyed)
+            bitmap->SetColourKey(key.r, key.g, key.b);
+
+        return bitmap;
     }
 }
