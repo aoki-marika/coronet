@@ -65,7 +65,7 @@ namespace Coronet
 
             void InsertFrame(int index, Frame<T> frame)
             {
-                frames.insert(index, frame);
+                frames.insert(frames.begin() + index, frame);
             }
 
             void InsertFrame(int index, T content, double duration)
@@ -75,7 +75,7 @@ namespace Coronet
 
             void InsertFrames(int index, std::vector<Frame<T>> frames)
             {
-                frames.insert(index, frames.begin(), frames.end());
+                frames.insert(frames.begin() + index, frames.begin(), frames.end());
             }
 
             void GoToFrame(int frameIndex)
