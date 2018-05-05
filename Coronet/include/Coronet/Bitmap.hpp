@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 
 #include "Vector2.hpp"
+#include "Palette.hpp"
 
 namespace Coronet
 {
@@ -28,6 +29,7 @@ namespace Coronet
             bool IsColourKeyed();
             void SetColourKey(SDL_Colour colour);
             void SetColourKey(Uint32 colour);
+            void SetPalette(Palette palette);
             SDL_Texture *ToTexture(SDL_Renderer *renderer);
     };
 }

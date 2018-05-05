@@ -5,6 +5,7 @@
 
 namespace Coronet
 {
+    // todo: allow setting areas to different palettes
     TiledTexture::TiledTexture(const std::shared_ptr<BitmapSheet> &sheet, int width, int height)
     {
         this->sheet = sheet;
