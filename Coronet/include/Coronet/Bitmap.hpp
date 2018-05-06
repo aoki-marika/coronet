@@ -14,10 +14,14 @@ namespace Coronet
             SDL_Surface *surface;
             SDL_RWops *rw = nullptr;
             bool colourKeyed = false;
+            Palette palette;
+            bool hasPalette = false;
 
         protected:
+            bool HasPalette();
             SDL_Surface *GetSurface();
             Uint32 GetColourKey();
+            Palette GetPalette();
 
         public:
             Bitmap(const char *path);

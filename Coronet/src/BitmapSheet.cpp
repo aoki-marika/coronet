@@ -80,6 +80,9 @@ namespace Coronet
         if (colourKeyed)
             bitmap->SetColourKey(key);
 
+        if (HasPalette())
+            bitmap->SetPalette(GetPalette());
+
         return bitmap;
     }
 }

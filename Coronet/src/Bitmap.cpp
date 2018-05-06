@@ -43,6 +43,11 @@ namespace Coronet
             SDL_RWclose(rw);
     }
 
+    bool Bitmap::HasPalette()
+    {
+        return hasPalette;
+    }
+
     SDL_Surface *Bitmap::GetSurface()
     {
         return surface;
@@ -54,6 +59,11 @@ namespace Coronet
         SDL_GetColorKey(surface, &key);
 
         return key;
+    }
+
+    Palette Bitmap::GetPalette()
+    {
+        return palette;
     }
 
     Vector2 Bitmap::GetSize()
@@ -96,6 +106,8 @@ namespace Coronet
                 colours[i] = colour;
             }
 
+            hasPalette = true;
+            this->palette = palette;
             SDL_SetPaletteColors(pal, colours, 0, pal->ncolors);
         }
         else
