@@ -34,6 +34,7 @@ namespace Coronet
             ~TiledTexture();
 
             void SetTile(int x, int y, Tile tile);
+            void SetPalette(Palette palette);
             void SetPalette(SDL_Rect area, Palette palette);
     };
 }

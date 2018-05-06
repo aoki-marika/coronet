@@ -94,6 +94,11 @@ namespace Coronet
         SDL_SetRenderTarget(renderer, NULL);
     }
 
+    void TiledTexture::SetPalette(Palette palette)
+    {
+        SetPalette({ 0, 0, size.x, size.y }, palette);
+    }
+
     // todo: add a redraw area function so the palette can be updated realtime
     void TiledTexture::SetPalette(SDL_Rect area, Palette palette)
     {
