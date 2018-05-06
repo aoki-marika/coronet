@@ -4,6 +4,7 @@
 
 namespace Coronet
 {
+    //todo: to struct
     class Tile
     {
         protected:

@@ -21,6 +21,8 @@ namespace Coronet
             SDL_Texture *tilesTexture = nullptr;
             SDL_Renderer *renderer;
 
+            void drawTile(int x, int y, Tile bitmap);
+
         protected:
             Vector2 GetDrawSize() override;
             SDL_Texture *GetDrawTexture() override;

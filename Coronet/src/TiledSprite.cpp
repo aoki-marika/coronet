@@ -39,6 +39,47 @@ namespace Coronet
 
         if (sheet->IsColourKeyed())
             SDL_SetTextureBlendMode(tilesTexture, SDL_BLENDMODE_BLEND);
+
+        // draw all the tiles set before we were loaded
+        for (int y = 0; y < tiles.size(); y++)
+        {
+            for (int x = 0; x < tiles[y].size(); x++)
+            {
+                auto t = tiles[y][x];
+
+                // ignore unset tiles
+                if (t.GetSheetPosition().x >= 0 && t.GetSheetPosition().y >= 0)
+                    drawTile(x, y, t);
+            }
+        }
+    }
+
+    void TiledSprite::drawTile(int x, int y, Tile tile)
+    {
+        SDL_Rect destRect =
+        {
+            x * tileSize.x,
+            y * tileSize.y,
+            tileSize.x,
+            tileSize.y
+        };
+
+        auto bitmap = sheet->GetTile(tile);
+
+        for (auto &p : palettes)
+        {
+            auto a = p.first;
+
+            if (x >= a.x && y >= a.y &&
+                x < a.x + a.w && y < a.y + a.h)
+                bitmap->SetPalette(p.second);
+        }
+
+        SDL_Texture *texture = bitmap->ToTexture(renderer);
+
+        SDL_SetRenderTarget(renderer, tilesTexture);
+        SDL_RenderCopy(renderer, texture, NULL, &destRect);
+        SDL_SetRenderTarget(renderer, NULL);
     }
 
     SDL_Texture *TiledSprite::GetDrawTexture()
@@ -55,7 +96,6 @@ namespace Coronet
         };
     }
 
-    // todo: allow setting tiles before loading
     void TiledSprite::SetTile(int x, int y, Tile tile)
     {
         if (x < 0 || y < 0 || x >= size.x || y >= size.y)
@@ -67,30 +107,8 @@ namespace Coronet
 
         tiles[y][x] = tile;
 
-        SDL_Rect destRect =
-        {
-            x * tileSize.x,
-            y * tileSize.y,
-            tileSize.x,
-            tileSize.y
-        };
-
-        auto tileBitmap = sheet->GetTile(tile);
-
-        for (auto &p : palettes)
-        {
-            auto a = p.first;
-
-            if (x >= a.x && y >= a.y &&
-                x < a.x + a.w && y < a.y + a.h)
-                tileBitmap->SetPalette(p.second);
-        }
-
-        SDL_Texture *texture = tileBitmap->ToTexture(renderer);
-
-        SDL_SetRenderTarget(renderer, tilesTexture);
-        SDL_RenderCopy(renderer, texture, NULL, &destRect);
-        SDL_SetRenderTarget(renderer, NULL);
+        if (State == DrawableLoadState::Loaded)
+            drawTile(x, y, tile);
     }
 
     void TiledSprite::SetPalette(Palette palette)
@@ -98,7 +116,6 @@ namespace Coronet
         SetPalette({ 0, 0, size.x, size.y }, palette);
     }
 
-    // todo: add a redraw area function so the palette can be updated realtime
     void TiledSprite::SetPalette(SDL_Rect area, Palette palette)
     {
         if (area.x < 0 || area.y < 0 || area.x + area.w > size.x || area.y + area.y > size.y)

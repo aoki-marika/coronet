@@ -8,8 +8,10 @@ namespace Tests
         private:
             std::shared_ptr<Coronet::TiledSprite> tiled, paletteTiled;
 
+            void setTiles();
+            void setPalettes();
+
         protected:
             void Load(Coronet::DependencyManager &dependencies) override;
-            void LoadComplete() override;
     };
 }
