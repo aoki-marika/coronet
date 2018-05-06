@@ -1,5 +1,4 @@
 #include <sstream>
-#include <iostream>
 #include <SDL2/SDL_image.h>
 
 #include "Bitmap.hpp"
