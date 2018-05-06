@@ -1,8 +1,10 @@
 #include <sstream>
+#include <iostream>
 #include <SDL2/SDL_image.h>
 
 #include "Bitmap.hpp"
 #include "Utilities.hpp"
+#include "Logging.hpp"
 
 namespace Coronet
 {
@@ -74,6 +76,33 @@ namespace Coronet
     {
         SDL_SetColorKey(surface, SDL_TRUE, colour);
         colourKeyed = true;
+    }
+
+    void Bitmap::SetPalette(Palette palette)
+    {
+        auto pal = surface->format->palette;
+
+        if (pal != nullptr)
+        {
+            SDL_Color colours[pal->ncolors];
+
+            for (int i = 0; i < pal->ncolors; i++)
+            {
+                auto colour = pal->colors[i];
+
+                for (auto &c : palette.Swap)
+                    if (i == c.first)
+                        colour = c.second;
+
+                colours[i] = colour;
+            }
+
+            SDL_SetPaletteColors(pal, colours, 0, pal->ncolors);
+        }
+        else
+        {
+            Log(LogLevel::Warning) << "Cannot set the palette of an SDL_Surface without a paletted format.";
+        }
     }
 
     SDL_Texture *Bitmap::ToTexture(SDL_Renderer *renderer)
