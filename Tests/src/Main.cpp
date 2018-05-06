@@ -5,7 +5,7 @@
 #include "TestContainer.hpp"
 #include "TestCamera.hpp"
 #include "TestTransform.hpp"
-#include "TestTiledTexture.hpp"
+#include "TestTiledSprite.hpp"
 #include "TestAnimation.hpp"
 #include "TestKeyInput.hpp"
 #include "TestFlip.hpp"
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     game->RegisterTest<TestContainer>();
     game->RegisterTest<TestCamera>();
     game->RegisterTest<TestTransform>();
-    game->RegisterTest<TestTiledTexture>();
+    game->RegisterTest<TestTiledSprite>();
     game->RegisterTest<TestAnimation>();
     game->RegisterTest<TestKeyInput>();
     game->RegisterTest<TestFlip>();

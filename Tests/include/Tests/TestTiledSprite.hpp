@@ -1,12 +1,12 @@
 #include <Coronet/TestCase.hpp>
-#include <Coronet/TiledTexture.hpp>
+#include <Coronet/TiledSprite.hpp>
 
 namespace Tests
 {
-    class TestTiledTexture : public Coronet::TestCase
+    class TestTiledSprite : public Coronet::TestCase
     {
         private:
-            std::shared_ptr<Coronet::TiledTexture> tiled, paletteTiled;
+            std::shared_ptr<Coronet::TiledSprite> tiled, paletteTiled;
 
         protected:
             void Load(Coronet::DependencyManager &dependencies) override;

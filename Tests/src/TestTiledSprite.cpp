@@ -1,13 +1,13 @@
 #include <Coronet/AssetStore.hpp>
 #include <Coronet/Sprite.hpp>
 
-#include "TestTiledTexture.hpp"
+#include "TestTiledSprite.hpp"
 
 using Coronet::Palette;
 
 namespace Tests
 {
-    void TestTiledTexture::Load(Coronet::DependencyManager &dependencies)
+    void TestTiledSprite::Load(Coronet::DependencyManager &dependencies)
     {
         TestCase::Load(dependencies);
 
@@ -18,10 +18,10 @@ namespace Tests
         auto paletteSheet = assets->GetBitmapSheet("palette-tiles.png", 16, 16);
         sheet->SetColourKey({ 255, 0, 255 });
 
-        tiled = std::make_shared<Coronet::TiledTexture>(sheet, 10, 10);
+        tiled = std::make_shared<Coronet::TiledSprite>(sheet, 10, 10);
         tiled->Position = { 0, 16 };
 
-        paletteTiled = std::make_shared<Coronet::TiledTexture>(paletteSheet, 2, 3);
+        paletteTiled = std::make_shared<Coronet::TiledSprite>(paletteSheet, 2, 3);
         paletteTiled->Position = { 80, 0 };
 
         auto sprite = std::make_shared<Coronet::Sprite>(sheet->GetTile({ 0, 0 }));
@@ -33,7 +33,7 @@ namespace Tests
         Add(paletteTiled);
     }
 
-    void TestTiledTexture::LoadComplete()
+    void TestTiledSprite::LoadComplete()
     {
         TestCase::LoadComplete();
 
