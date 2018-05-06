@@ -48,7 +48,7 @@ namespace Coronet
                 auto t = tiles[y][x];
 
                 // ignore unset tiles
-                if (t.GetSheetPosition().x >= 0 && t.GetSheetPosition().y >= 0)
+                if (t.SheetPosition.x >= 0 && t.SheetPosition.y >= 0)
                     drawTile(x, y, t);
             }
         }
@@ -101,7 +101,7 @@ namespace Coronet
         if (x < 0 || y < 0 || x >= size.x || y >= size.y)
         {
             std::stringstream message;
-            message << "Tile position (" << tile.GetSheetPosition().x << "," << tile.GetSheetPosition().y << ") is out of bounds of tiled sprite with size (" << size.x << "," << size.y << ").";
+            message << "Tile position (" << tile.SheetPosition.x << "," << tile.SheetPosition.y << ") is out of bounds of tiled sprite with size (" << size.x << "," << size.y << ").";
             throw std::invalid_argument(message.str());
         }
 

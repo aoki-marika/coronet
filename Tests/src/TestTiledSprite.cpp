@@ -4,6 +4,7 @@
 #include "TestTiledSprite.hpp"
 
 using Coronet::Palette;
+using Coronet::Tile;
 
 namespace Tests
 {
@@ -53,7 +54,7 @@ namespace Tests
                     continue;
                 }
 
-                tiled->SetTile(x, y, Coronet::Tile(tileX, tileY));
+                tiled->SetTile(x, y, Tile({ tileX, tileY }));
 
                 tileX++;
             }

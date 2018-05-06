@@ -40,10 +40,10 @@ namespace Coronet
 
     std::shared_ptr<Bitmap> BitmapSheet::GetTile(Tile tile)
     {
-        if (tile.GetSheetPosition().x >= tileCount.x || tile.GetSheetPosition().y >= tileCount.y)
+        if (tile.SheetPosition.x >= tileCount.x || tile.SheetPosition.y >= tileCount.y)
         {
             std::stringstream message;
-            message << "Tile at (" << tile.GetSheetPosition().x << "," << tile.GetSheetPosition().y << ") is out of bounds of sheet with size (" << tileCount.x << "," << tileCount.y << ").";
+            message << "Tile at (" << tile.SheetPosition.x << "," << tile.SheetPosition.y << ") is out of bounds of sheet with size (" << tileCount.x << "," << tileCount.y << ").";
             throw std::invalid_argument(message.str());
         }
 
@@ -61,8 +61,8 @@ namespace Coronet
             SDL_SetSurfacePalette(surface, format->palette);
 
         SDL_Rect sourceRect = {
-            tileSize.x * tile.GetSheetPosition().x,
-            tileSize.y * tile.GetSheetPosition().y,
+            tileSize.x * tile.SheetPosition.x,
+            tileSize.y * tile.SheetPosition.y,
             tileSize.x,
             tileSize.y
         };
