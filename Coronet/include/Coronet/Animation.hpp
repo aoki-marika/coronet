@@ -10,8 +10,6 @@ namespace Coronet
 {
     template<class T> class Animation : public Container
     {
-        // todo: add ctor with frames
-
         private:
             std::shared_ptr<GameClock> clock;
             std::vector<Frame<T>> frames;
