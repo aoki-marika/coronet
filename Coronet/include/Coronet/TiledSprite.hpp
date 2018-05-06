@@ -10,9 +10,7 @@
 
 namespace Coronet
 {
-    // todo: iffy on the name, as its not the standard naming scheme for texture subclasses
-    // todo: TiledTexture -> TiledSprite
-    class TiledTexture : public Texture
+    class TiledSprite : public Texture
     {
         private:
             std::shared_ptr<BitmapSheet> sheet;
@@ -23,6 +21,8 @@ namespace Coronet
             SDL_Texture *tilesTexture = nullptr;
             SDL_Renderer *renderer;
 
+            void drawTile(int x, int y, Tile bitmap);
+
         protected:
             Vector2 GetDrawSize() override;
             SDL_Texture *GetDrawTexture() override;
@@ -30,8 +30,8 @@ namespace Coronet
             void Load(DependencyManager &dependencies) override;
 
         public:
-            TiledTexture(const std::shared_ptr<BitmapSheet> &sheet, int width, int height);
-            ~TiledTexture();
+            TiledSprite(const std::shared_ptr<BitmapSheet> &sheet, int width, int height);
+            ~TiledSprite();
 
             void SetTile(int x, int y, Tile tile);
             void SetPalette(Palette palette);

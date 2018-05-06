@@ -1,11 +1,11 @@
 #include <sstream>
 
-#include "TiledTexture.hpp"
+#include "TiledSprite.hpp"
 #include "Renderer.hpp"
 
 namespace Coronet
 {
-    TiledTexture::TiledTexture(const std::shared_ptr<BitmapSheet> &sheet, int width, int height)
+    TiledSprite::TiledSprite(const std::shared_ptr<BitmapSheet> &sheet, int width, int height)
     {
         this->sheet = sheet;
         this->size = { width, height };
@@ -14,13 +14,13 @@ namespace Coronet
         tiles = std::vector<std::vector<Tile>>(height, std::vector<Tile>(width));
     }
 
-    TiledTexture::~TiledTexture()
+    TiledSprite::~TiledSprite()
     {
         if (tilesTexture != nullptr)
             SDL_DestroyTexture(tilesTexture);
     }
 
-    void TiledTexture::Load(DependencyManager &dependencies)
+    void TiledSprite::Load(DependencyManager &dependencies)
     {
         Texture::Load(dependencies);
 
@@ -39,34 +39,23 @@ namespace Coronet
 
         if (sheet->IsColourKeyed())
             SDL_SetTextureBlendMode(tilesTexture, SDL_BLENDMODE_BLEND);
-    }
 
-    SDL_Texture *TiledTexture::GetDrawTexture()
-    {
-        return tilesTexture;
-    }
-
-    Vector2 TiledTexture::GetDrawSize()
-    {
-        return
+        // draw all the tiles set before we were loaded
+        for (int y = 0; y < tiles.size(); y++)
         {
-            size.x * tileSize.x,
-            size.y * tileSize.y
-        };
-    }
+            for (int x = 0; x < tiles[y].size(); x++)
+            {
+                auto t = tiles[y][x];
 
-    // todo: allow setting tiles before loading
-    void TiledTexture::SetTile(int x, int y, Tile tile)
-    {
-        if (x < 0 || y < 0 || x >= size.x || y >= size.y)
-        {
-            std::stringstream message;
-            message << "Tile position (" << tile.GetSheetPosition().x << "," << tile.GetSheetPosition().y << ") is out of bounds of tiled texture with size (" << size.x << "," << size.y << ").";
-            throw std::invalid_argument(message.str());
+                // ignore unset tiles
+                if (t.SheetPosition.x >= 0 && t.SheetPosition.y >= 0)
+                    drawTile(x, y, t);
+            }
         }
+    }
 
-        tiles[y][x] = tile;
-
+    void TiledSprite::drawTile(int x, int y, Tile tile)
+    {
         SDL_Rect destRect =
         {
             x * tileSize.x,
@@ -75,7 +64,7 @@ namespace Coronet
             tileSize.y
         };
 
-        auto tileBitmap = sheet->GetTile(tile);
+        auto bitmap = sheet->GetTile(tile);
 
         for (auto &p : palettes)
         {
@@ -83,28 +72,56 @@ namespace Coronet
 
             if (x >= a.x && y >= a.y &&
                 x < a.x + a.w && y < a.y + a.h)
-                tileBitmap->SetPalette(p.second);
+                bitmap->SetPalette(p.second);
         }
 
-        SDL_Texture *texture = tileBitmap->ToTexture(renderer);
+        SDL_Texture *texture = bitmap->ToTexture(renderer);
 
         SDL_SetRenderTarget(renderer, tilesTexture);
         SDL_RenderCopy(renderer, texture, NULL, &destRect);
         SDL_SetRenderTarget(renderer, NULL);
     }
 
-    void TiledTexture::SetPalette(Palette palette)
+    SDL_Texture *TiledSprite::GetDrawTexture()
+    {
+        return tilesTexture;
+    }
+
+    Vector2 TiledSprite::GetDrawSize()
+    {
+        return
+        {
+            size.x * tileSize.x,
+            size.y * tileSize.y
+        };
+    }
+
+    void TiledSprite::SetTile(int x, int y, Tile tile)
+    {
+        if (x < 0 || y < 0 || x >= size.x || y >= size.y)
+        {
+            std::stringstream message;
+            message << "Tile position (" << tile.SheetPosition.x << "," << tile.SheetPosition.y << ") is out of bounds of tiled sprite with size (" << size.x << "," << size.y << ").";
+            throw std::invalid_argument(message.str());
+        }
+
+        tiles[y][x] = tile;
+
+        if (State == DrawableLoadState::Loaded)
+            drawTile(x, y, tile);
+    }
+
+    void TiledSprite::SetPalette(Palette palette)
     {
         SetPalette({ 0, 0, size.x, size.y }, palette);
     }
 
-    // todo: add a redraw area function so the palette can be updated realtime
-    void TiledTexture::SetPalette(SDL_Rect area, Palette palette)
+    void TiledSprite::SetPalette(SDL_Rect area, Palette palette)
     {
         if (area.x < 0 || area.y < 0 || area.x + area.w > size.x || area.y + area.y > size.y)
         {
             std::stringstream message;
-            message << "Rect (" << area.x << "," << area.y << "," << area.w << "," << area.h << ") is out of bounds of tiled texture with size (" << size.x << "," << size.y << ").";
+            message << "Rect (" << area.x << "," << area.y << "," << area.w << "," << area.h << ") is out of bounds of tiled sprite with size (" << size.x << "," << size.y << ").";
             throw std::invalid_argument(message.str());
         }
 

@@ -4,15 +4,8 @@
 
 namespace Coronet
 {
-    class Tile
+    struct Tile
     {
-        protected:
-            Vector2 sheetPosition;
-
-        public:
-            Tile(int x, int y);
-            Tile();
-
-            Vector2 GetSheetPosition();
+        Vector2 SheetPosition = { -1, -1 };
     };
 }

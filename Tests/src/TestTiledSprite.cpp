@@ -1,13 +1,14 @@
 #include <Coronet/AssetStore.hpp>
 #include <Coronet/Sprite.hpp>
 
-#include "TestTiledTexture.hpp"
+#include "TestTiledSprite.hpp"
 
 using Coronet::Palette;
+using Coronet::Tile;
 
 namespace Tests
 {
-    void TestTiledTexture::Load(Coronet::DependencyManager &dependencies)
+    void TestTiledSprite::Load(Coronet::DependencyManager &dependencies)
     {
         TestCase::Load(dependencies);
 
@@ -18,14 +19,17 @@ namespace Tests
         auto paletteSheet = assets->GetBitmapSheet("palette-tiles.png", 16, 16);
         sheet->SetColourKey({ 255, 0, 255 });
 
-        tiled = std::make_shared<Coronet::TiledTexture>(sheet, 10, 10);
+        tiled = std::make_shared<Coronet::TiledSprite>(sheet, 10, 10);
         tiled->Position = { 0, 16 };
 
-        paletteTiled = std::make_shared<Coronet::TiledTexture>(paletteSheet, 2, 3);
+        paletteTiled = std::make_shared<Coronet::TiledSprite>(paletteSheet, 2, 3);
         paletteTiled->Position = { 80, 0 };
 
         auto sprite = std::make_shared<Coronet::Sprite>(sheet->GetTile({ 0, 0 }));
         sprite->Position = { 16, 0 };
+
+        setPalettes();
+        setTiles();
 
         Add(background);
         Add(sprite);
@@ -33,10 +37,8 @@ namespace Tests
         Add(paletteTiled);
     }
 
-    void TestTiledTexture::LoadComplete()
+    void TestTiledSprite::setTiles()
     {
-        TestCase::LoadComplete();
-
         int tileX = 0;
         int tileY = 0;
         for (int x = 0; x < 10; x++)
@@ -52,7 +54,7 @@ namespace Tests
                     continue;
                 }
 
-                tiled->SetTile(x, y, Coronet::Tile(tileX, tileY));
+                tiled->SetTile(x, y, Tile({ tileX, tileY }));
 
                 tileX++;
             }
@@ -60,6 +62,15 @@ namespace Tests
             tileY++;
         }
 
+        paletteTiled->SetTile(0, 0, { 0, 0 });
+        paletteTiled->SetTile(0, 1, { 0, 1 });
+        paletteTiled->SetTile(1, 0, { 1, 0 });
+        paletteTiled->SetTile(1, 1, { 1, 1 });
+        paletteTiled->SetTile(0, 2, { 0, 2 });
+    }
+
+    void TestTiledSprite::setPalettes()
+    {
         int white = 255;
         int lgray = 170;
         int dgray = 85;
@@ -93,11 +104,5 @@ namespace Tests
         paletteTiled->SetPalette({ 1, 0, 1, 1 }, paletteTwo);
         paletteTiled->SetPalette({ 0, 1, 1, 1 }, paletteThree);
         paletteTiled->SetPalette({ 1, 1, 1, 2 }, paletteFour);
-
-        paletteTiled->SetTile(0, 0, { 0, 0 });
-        paletteTiled->SetTile(0, 1, { 0, 1 });
-        paletteTiled->SetTile(1, 0, { 1, 0 });
-        paletteTiled->SetTile(1, 1, { 1, 1 });
-        paletteTiled->SetTile(0, 2, { 0, 2 });
     }
 }
